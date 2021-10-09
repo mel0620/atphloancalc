@@ -59,7 +59,7 @@ export default {
       sha256Fingerprints: ['/* your SHA-256 keys */'],
       /* optional */
       /* overwrite default location for icon */
-      iconPath: '/static/atphlogo.jpg',
+      iconPath: '/static/logo.png',
       /* Overwrite folder where to put .wellknown */
       distFolder: '.nuxt/dist/client',
     }],
