@@ -1,6 +1,6 @@
 <template>
     <v-row>
-        <v-col class="text-center">
+        <v-col>
             <v-data-table
                 title="CMF and Insurance Estimate"
                 :headers="headers"
@@ -18,11 +18,11 @@ export default {
             headers: [
                 {
                     text: 'Amount Financed',
-                    align: 'center',
+                    align: 'start',
                     value: 'af',
                 },
-                { text: 'CMF', align: 'center', value: 'cmf' },
-                { text: 'Insurance with AOG', align: 'center', value: 'ins' },
+                { text: 'CMF', align: 'start', value: 'cmf' },
+                { text: 'Insurance with AOG', align: 'start', value: 'ins' },
             ],
             estimates: [
                 {

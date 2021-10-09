@@ -14,7 +14,7 @@
                             placeholder="Year Model/Make/Variant"
                             hide-details
                         ></v-text-field>
-                        <div v-if="isJockUp">
+                        <div v-if="isJackUp">
                             <v-row dense>
                                 <v-col cols="12" md="6" sm="6">
                                     <v-text-field
@@ -29,8 +29,8 @@
                                 </v-col>
                                 <v-col cols="12" md="6" sm="6">
                                     <v-text-field
-                                        v-model="jockUpPrice"
-                                        label="Jock-up Price"
+                                        v-model="jackUpPrice"
+                                        label="Jack-up Price"
                                         outlined
                                         placeholder="0.00"
                                         :rules="rules"
@@ -78,11 +78,11 @@
                                 v-model="isCustom"
                                 label="Custom D.P"
                                 color="green"
-                                v-if="!isJockUp"
+                                v-if="!isJackUp"
                             ></v-switch>
                             <v-switch
-                                v-model="isJockUp"
-                                label="Jock-up"
+                                v-model="isJackUp"
+                                label="Jack-up"
                                 color="green"
                                 class="ml-3"
                             ></v-switch>
@@ -92,12 +92,16 @@
                             label="Chattel Mortgage Fee"
                             outlined
                             placeholder="0.00"
+                            append-icon="mdi-table"
+                            @click:append="showReferenceDialog = true"
                         ></v-text-field>
                         <v-text-field
                             v-model="insurance"
                             label="Insurance with AOG"
                             outlined
                             placeholder="0.00"
+                            append-icon="mdi-table"
+                            @click:append="showReferenceDialog = true"
                         ></v-text-field>
                         <v-text-field
                             v-model="others"
@@ -107,8 +111,8 @@
                         ></v-text-field>
                     </v-form>
                     <v-row>
-                        <v-col cols="12" v-if="isJockUp">
-                            <v-btn @click="computeJockUp()" depressed color="primary" block>
+                        <v-col cols="12" v-if="isJackUp">
+                            <v-btn @click="computeJackUp()" depressed color="primary" block>
                                 Compute
                             </v-btn>
                         </v-col>
@@ -131,10 +135,10 @@
                 </v-card-title>
 
                 <v-card-text>
-                    <div v-if="isJockUp" class="result mt-3">
+                    <div v-if="isJackUp" class="result mt-3">
                         <div><h3>{{ unitDetails }}</h3></div>
                         <div><b>Original Price:</b> {{ formatPrice(origPrice) }}</div>
-                        <div><b>Jock-up Price:</b> {{ formatPrice(jockUpPrice) }}</div>
+                        <div><b>Jack-up Price:</b> {{ formatPrice(jackUpPrice) }}</div>
                         <div><b>Down Payment:</b> {{ formatPrice(downPayment) }}</div>
                         <div><b>Amount Financed:</b> {{ formatPrice(amountFinanced) }}</div>
                         <div><b>Terms:</b></div>
@@ -150,8 +154,8 @@
                     <div v-else class="result mt-3">
                         <div><h3>{{ unitDetails }}</h3></div>
                         <div><b>Unit Price:</b> {{ formatPrice(unitPrice) }}</div>
-                        <div><b><span v-if="!isJockUp && !isCustom">{{ downPaymentSelect }}%</span> Down Payment:</b> {{ formatPrice(downPayment) }}</div>
-                        <div><b><span v-if="!isJockUp && !isCustom">{{ amountFinancedPercent }}%</span> Amount Financed:</b> {{ formatPrice(amountFinanced) }}</div>
+                        <div><b><span v-if="!isJackUp && !isCustom">{{ downPaymentSelect }}%</span> Down Payment:</b> {{ formatPrice(downPayment) }}</div>
+                        <div><b><span v-if="!isJackUp && !isCustom">{{ amountFinancedPercent }}%</span> Amount Financed:</b> {{ formatPrice(amountFinanced) }}</div>
                         <div><b>Terms:</b></div>
                         <div><b>12 Months:</b> {{ formatPrice(oneYear) }}</div>
                         <div><b>24 Months:</b> {{ formatPrice(twoYears) }}</div>
@@ -178,6 +182,32 @@
                 </v-card-actions>
             </v-card>
         </v-dialog>
+        <v-dialog v-model="showReferenceDialog" fullscreen>
+            <v-card>
+                <v-card-title class="text-h5 primary white--text">
+                    Chattel and Insurance Estimate
+                </v-card-title>
+                <div class="pa-3">
+                    <v-data-table
+                        title="CMF and Insurance Estimate"
+                        :headers="headers"
+                        :items="estimates"
+                        :items-per-page="5"
+                        class="elevation-1 mt-4"
+                    ></v-data-table>
+                </div>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                        depressed
+                        color="primary"
+                        @click="showReferenceDialog = false"
+                    >
+                        OK
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
     </div>
 </template>
 
@@ -186,10 +216,11 @@ export default {
     data: () => ({
         isResultDialog: false,
         isCustom: false,
+        showReferenceDialog: false,
 
-        isJockUp: false,
+        isJackUp: false,
         origPrice: null,
-        jockUpPrice: null,
+        jackUpPrice: null,
 
         valid: true,
         rules: [
@@ -215,6 +246,43 @@ export default {
         twoYears: null,
         threeYears: null,
         fourYears: null,
+
+        headers: [
+            {
+                text: 'Amount Financed',
+                align: 'start',
+                value: 'af',
+            },
+            { text: 'CMF', align: 'start', value: 'cmf' },
+            { text: 'Insurance with AOG', align: 'start', value: 'ins' },
+        ],
+        estimates: [
+            {
+                af: '300K - 450K',
+                cmf: '24,000',
+                ins: '29,000'
+            },
+            {
+                af: '490K',
+                cmf: '25,000',
+                ins: '30,000'
+            },
+            {
+                af: '500K',
+                cmf: '27,000',
+                ins: '32,000'
+            },
+            {
+                af: '750K - 800K',
+                cmf: '30,000',
+                ins: '35,000'
+            },
+            {
+                af: '1.1M',
+                cmf: '40,000',
+                ins: '38,000'
+            },
+        ],
     }),
     methods: {
         compute() {
@@ -295,13 +363,13 @@ export default {
 
             console.log(this.totalEstCashout)
         },
-        computeJockUp() {
+        computeJackUp() {
             if (!this.$refs.form.validate()) {
                 return;
             }
 
             this.isResultDialog = true;
-            this.amountFinanced = this.jockUpPrice * 0.70;
+            this.amountFinanced = this.jackUpPrice * 0.70;
             this.downPayment = this.origPrice - this.amountFinanced;
 
             this.oneYear = this.amountFinanced * 1.1285 / 12;
