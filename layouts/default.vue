@@ -28,6 +28,8 @@
       :clipped-left="clipped"
       fixed
       app
+      color="primary"
+      dark
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title v-text="title" />

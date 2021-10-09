@@ -5,6 +5,7 @@
         src="/atph-logo.svg"
         alt="autotrustph"
         width="150"
+        class="mt-5"
       >
       <br>
       <img
@@ -13,7 +14,7 @@
         width="150"
       >
       <blockquote class="blockquote">
-        &#8220;Used Car Loan, Brand New Car Loan. Sangla OR/CR, Truck & Buss Loan.&#8221;
+        &#8220;Used Car Loan, Brand New Car Loan, Sangla OR/CR, and Truck & Buss Loan.&#8221;
         <footer>
           <small>
             <!-- <em>&mdash;</em> -->

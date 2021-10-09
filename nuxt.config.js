@@ -44,6 +44,25 @@ export default {
     '@nuxtjs/pwa',
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
+    ['nuxt-twa-module', {
+      /* module options */
+      defaultUrl: 'https://autotrustph.com',
+      hostName: 'autotrustph.com',
+      applicationId: 'com.example.example',
+      launcherName: 'ATPH Loan Calculator',
+      versionCode: 1,
+      versionName: '1.0',
+      statusBarColor: '#800000',
+      // The sha256Fingerprints by is an array with one SHA-256 key string.
+      // But if you have multiple you can add them to the array. More information about the website asociation:
+      // https://developer.android.com/training/app-links/verify-site-associations#web-assoc
+      sha256Fingerprints: ['/* your SHA-256 keys */'],
+      /* optional */
+      /* overwrite default location for icon */
+      iconPath: '/static/atphlogo.jpg',
+      /* Overwrite folder where to put .wellknown */
+      distFolder: '.nuxt/dist/client',
+    }],
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -52,7 +71,17 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      lang: 'en'
+      name: 'ATPH\'s Loan Calculator',
+      lang: 'en',
+      orientation: 'portrait',
+      icons: [
+          {
+              src: 'atphlogo.jpg',
+              sizes: '196x196',
+              type: 'image/jpg',
+              purpose: 'any maskable'
+          }
+      ]
     }
   },
 
@@ -65,6 +94,11 @@ export default {
     theme: {
       dark: false,
       themes: {
+        light: {
+          primary: '#800000',
+          secondary: colors.red.lighten4, // #FFCDD2
+          accent: colors.indigo.base, // #3F51B5
+        },
         dark: {
           primary: colors.blue.darken2,
           accent: colors.grey.darken3,
