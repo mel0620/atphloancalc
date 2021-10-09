@@ -182,7 +182,7 @@
                 </v-card-actions>
             </v-card>
         </v-dialog>
-        <v-dialog v-model="showReferenceDialog" fullscreen>
+        <v-dialog v-model="showReferenceDialog" fullscreen hide-overlay transition="dialog-bottom-transition" >
             <v-card>
                 <v-card-title class="text-h5 primary white--text">
                     Chattel and Insurance Estimate
