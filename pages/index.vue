@@ -15,30 +15,24 @@
                             hide-details
                         ></v-text-field>
                         <div v-if="isJackUp">
-                            <v-row dense>
-                                <v-col cols="12" md="6" sm="6">
-                                    <v-text-field
-                                        v-model="origPrice"
-                                        label="Original Price"
-                                        outlined
-                                        placeholder="0.00"
-                                        :rules="rules"
-                                        hide-details
-                                        class="mt-3"
-                                    ></v-text-field>
-                                </v-col>
-                                <v-col cols="12" md="6" sm="6">
-                                    <v-text-field
-                                        v-model="jackUpPrice"
-                                        label="Jack-up Price"
-                                        outlined
-                                        placeholder="0.00"
-                                        :rules="rules"
-                                        hide-details
-                                        class="mt-3"
-                                    ></v-text-field>
-                                </v-col>
-                            </v-row>
+                            <v-text-field
+                                v-model="origPrice"
+                                label="Original Price"
+                                outlined
+                                placeholder="0.00"
+                                :rules="rules"
+                                hide-details
+                                class="mt-3"
+                            ></v-text-field>
+                            <v-text-field
+                                v-model="jackUpPrice"
+                                label="Jack-up Price"
+                                outlined
+                                placeholder="0.00"
+                                :rules="rules"
+                                hide-details
+                                class="mt-3"
+                            ></v-text-field>
                         </div>
                         <div v-else>
                             <v-text-field
