@@ -78,11 +78,11 @@ export default {
           title: 'Loan Calculator',
           to: '/'
         },
-        {
-          icon: 'mdi-table',
-          title: 'Reference',
-          to: '/reference'
-        },
+        // {
+        //   icon: 'mdi-table',
+        //   title: 'Reference',
+        //   to: '/reference'
+        // },
         {
           icon: 'mdi-domain',
           title: 'Abous Us',
