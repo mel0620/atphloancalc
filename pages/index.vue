@@ -1,12 +1,12 @@
 <template>
     <div>
         <v-container>
-            <v-row>
-                <v-col cols="12">
-                    <v-form ref="form"
-                        v-model="valid"
-                        lazy-validation
-                    >
+            <v-form ref="form"
+                v-model="valid"
+                lazy-validation
+            >
+                <v-row dense>
+                    <v-col cols="12">
                         <v-text-field
                             v-model="unitDetails"
                             label="Unit Details"
@@ -14,6 +14,8 @@
                             placeholder="Year Model/Make/Variant"
                             hide-details
                         ></v-text-field>
+                    </v-col>
+                    <v-col cols="12">
                         <v-combobox
                             v-model="bank"
                             :items="['JACCS','Security Bank','Maybank','Malayan Bank','Brand New']"
@@ -25,87 +27,108 @@
                             hide-details
                             class="mt-3"
                         ></v-combobox>
-                        <div v-if="isJackUp">
-                            <v-text-field
-                                v-model="origPrice"
-                                label="Original Price"
-                                outlined
-                                placeholder="0.00"
-                                :rules="rules"
-                                hide-details
-                                class="mt-3"
-                            ></v-text-field>
-                            <v-text-field
-                                v-model="jackUpPrice"
-                                label="Jack-up Price"
-                                outlined
-                                placeholder="0.00"
-                                :rules="rules"
-                                hide-details
-                                class="mt-3"
-                            ></v-text-field>
-                            <v-combobox
-                                v-model="jackUpAF"
-                                :items="[50,55,60,65,70]"
-                                prepend-inner-icon="mdi-percent"
-                                label="Amount Financed"
-                                placeholder="0%"
-                                outlined
-                                :rules="rules"
-                                hide-details
-                                class="mt-3"
-                            ></v-combobox>
-                        </div>
-                        <div v-else>
-                            <v-text-field
-                                v-model="unitPrice"
-                                label="Unit Price"
-                                outlined
-                                placeholder="0.00"
-                                :rules="rules"
-                                type="number"
-                                hide-details
-                                class="mt-3"
-                            ></v-text-field>
-                            <v-text-field
-                                v-if="isCustom"
-                                v-model="dpCustom"
-                                label="Down Payment"
-                                placeholder="0.00"
-                                outlined
-                                :rules="rules"
-                                type="number"
-                                hide-details
-                                class="mt-3"
-                            ></v-text-field>
-                            <v-combobox
-                                v-else
-                                v-model="downPaymentSelect"
-                                :items="downPaymentSelectItems"
-                                prepend-inner-icon="mdi-percent"
-                                label="Down Payment"
-                                placeholder="0%"
-                                outlined
-                                :rules="rules"
-                                hide-details
-                                class="mt-3"
-                            ></v-combobox>
-                        </div>
-                        <div class="d-flex justify-end">
-                            <v-switch
-                                v-model="isCustom"
-                                label="Custom D.P"
-                                color="green"
-                                v-if="!isJackUp"
-                            ></v-switch>
-                            <v-switch
-                                v-if="bank != 'Brand New'"
-                                v-model="isJackUp"
-                                label="Jack-up"
-                                color="green"
-                                class="ml-3"
-                            ></v-switch>
-                        </div>
+                    </v-col>
+                    <v-col cols="12">
+                        <v-row v-if="isJackUp" dense>
+                            <v-col cols="12">
+                                <v-text-field
+                                    v-model="origPrice"
+                                    label="Original Price"
+                                    outlined
+                                    placeholder="0.00"
+                                    :rules="rules"
+                                    hide-details
+                                    class="mt-3"
+                                ></v-text-field>
+                            </v-col>
+                            <v-col cols="12">
+                                <v-text-field
+                                    v-model="jackUpPrice"
+                                    label="Jack-up Price"
+                                    outlined
+                                    placeholder="0.00"
+                                    :rules="rules"
+                                    hide-details
+                                    class="mt-3"
+                                ></v-text-field>
+                            </v-col>
+                            <v-col cols="12">
+                                <v-combobox
+                                    v-model="jackUpAF"
+                                    :items="[50,55,60,65,70]"
+                                    prepend-inner-icon="mdi-percent"
+                                    label="Amount Financed"
+                                    placeholder="0%"
+                                    outlined
+                                    :rules="rules"
+                                    hide-details
+                                    class="mt-3"
+                                ></v-combobox>
+                            </v-col>
+                        </v-row>
+                        <v-row v-else dense>
+                            <v-col cols="12">
+                                <v-text-field
+                                    v-model="unitPrice"
+                                    label="Unit Price"
+                                    outlined
+                                    placeholder="0.00"
+                                    :rules="rules"
+                                    type="number"
+                                    hide-details
+                                    class="mt-3"
+                                ></v-text-field>
+                            </v-col>
+                            <v-col cols="12" v-if="isCustom">
+                                <v-text-field
+                                    v-model="dpCustom"
+                                    label="Down Payment"
+                                    placeholder="0.00"
+                                    outlined
+                                    :rules="rules"
+                                    type="number"
+                                    hide-details
+                                    class="mt-3"
+                                ></v-text-field>
+                            </v-col>
+                            <v-col cols="12" v-else>
+                                <v-combobox
+                                    v-model="downPaymentSelect"
+                                    :items="downPaymentSelectItems"
+                                    prepend-inner-icon="mdi-percent"
+                                    label="Down Payment"
+                                    placeholder="0%"
+                                    outlined
+                                    :rules="rules"
+                                    hide-details
+                                    class="mt-3"
+                                ></v-combobox>
+                            </v-col>
+                        </v-row>
+                    </v-col>
+                    <v-col cols="12">
+
+                    </v-col>
+                </v-row>
+                
+                <div class="d-flex justify-end">
+                    <v-switch
+                        v-model="isCustom"
+                        label="Custom D.P"
+                        color="green"
+                        v-if="!isJackUp"
+                    ></v-switch>
+                    <v-switch
+                        v-if="bank != 'Brand New'"
+                        v-model="isJackUp"
+                        label="Jack-up"
+                        color="green"
+                        class="ml-3"
+                    ></v-switch>
+                </div>
+
+                <v-row>
+                    <v-col cols="12" md="4" sm="12">
                         <v-text-field
                             v-model="chattel"
                             label="Chattel Mortgage Fee"
@@ -115,6 +138,8 @@
                             type="number"
                             @click:append="showReferenceDialog = true"
                         ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" md="4" sm="12">
                         <v-text-field
                             v-model="insurance"
                             label="Insurance with AOG"
@@ -124,6 +149,8 @@
                             type="number"
                             @click:append="showReferenceDialog = true"
                         ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" md="4" sm="12">
                         <v-text-field
                             v-model="others"
                             label="Others"
@@ -131,22 +158,28 @@
                             placeholder="0.00"
                             type="number"
                         ></v-text-field>
-                    </v-form>
-                    <v-row>
-                        <v-col cols="12" v-if="isJackUp">
-                            <v-btn @click="computeJackUp()" depressed color="primary" block>
-                                Compute
-                            </v-btn>
-                        </v-col>
-                        <v-col cols="12" v-else>
-                            <v-btn v-if="isCustom" @click="computeCustom()" depressed color="primary" block>
-                                Compute
-                            </v-btn>
-                            <v-btn v-else @click="compute()" depressed color="primary" block>
-                                Compute
-                            </v-btn>
-                        </v-col>
-                    </v-row>
+                    </v-col>
+                </v-row>
+            </v-form>
+            <v-row>
+                <v-col cols="12" v-if="isJackUp">
+                    <v-btn @click="computeJackUp()" depressed color="primary" block>
+                        Compute
+                    </v-btn>
+                    <v-btn @click="clear()" class="mt-3" depressed block>
+                        Clear
+                    </v-btn>
+                </v-col>
+                <v-col cols="12" v-else>
+                    <v-btn v-if="isCustom" @click="computeCustom()" depressed color="primary" block>
+                        Compute
+                    </v-btn>
+                    <v-btn v-else @click="compute()" depressed color="primary" block>
+                        Compute
+                    </v-btn>
+                    <v-btn @click="clear()" class="mt-3" depressed block>
+                        Clear
+                    </v-btn>
                 </v-col>
             </v-row>
         </v-container>
@@ -429,8 +462,12 @@ export default {
 
             this.totalEstCashout = parseInt(downpayment) + parseInt(chattel) + parseInt(insurance) + parseInt(others);
         },
-        reset() {
-            this.$refs.form.resetValidation()
+        clear() {
+            this.$refs.form.resetValidation();
+            this.unitPrice = 0;
+            this.chattel = 0;
+            this.insurance = 0;
+            this.others = 0;
         },
         formatPrice(value) {
             var formatter = new Intl.NumberFormat('en-US', {
