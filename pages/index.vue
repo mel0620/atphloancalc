@@ -14,6 +14,17 @@
                             placeholder="Year Model/Make/Variant"
                             hide-details
                         ></v-text-field>
+                        <v-combobox
+                            v-model="bank"
+                            :items="['JACCS','Security Bank','Maybank','Malayan Bank','Brand New']"
+                            prepend-inner-icon="mdi-bank"
+                            label="Financing"
+                            placeholder="Select Bank/Financing Company"
+                            outlined
+                            :rules="rules"
+                            hide-details
+                            class="mt-3"
+                        ></v-combobox>
                         <div v-if="isJackUp">
                             <v-text-field
                                 v-model="origPrice"
@@ -33,6 +44,17 @@
                                 hide-details
                                 class="mt-3"
                             ></v-text-field>
+                            <v-combobox
+                                v-model="jackUpAF"
+                                :items="[50,55,60,65,70]"
+                                prepend-inner-icon="mdi-percent"
+                                label="Amount Financed"
+                                placeholder="0%"
+                                outlined
+                                :rules="rules"
+                                hide-details
+                                class="mt-3"
+                            ></v-combobox>
                         </div>
                         <div v-else>
                             <v-text-field
@@ -77,6 +99,7 @@
                                 v-if="!isJackUp"
                             ></v-switch>
                             <v-switch
+                                v-if="bank != 'Brand New'"
                                 v-model="isJackUp"
                                 label="Jack-up"
                                 color="green"
@@ -137,7 +160,7 @@
                     <div v-if="isJackUp" class="result mt-3">
                         <div><h3>{{ unitDetails }}</h3></div>
                         <div><b>Original Price:</b> {{ formatPrice(origPrice) }}</div>
-                        <div><b>Jack-up Price:</b> {{ formatPrice(jackUpPrice) }}</div>
+                        <div><b>Jack-up Price:</b> {{ formatPrice(jackUpPriceTotal) }}</div>
                         <div><b>Down Payment:</b> {{ formatPrice(downPayment) }}</div>
                         <div><b>Amount Financed:</b> {{ formatPrice(amountFinanced) }}</div>
                         <div><b>Terms:</b></div>
@@ -160,8 +183,9 @@
                         <div><b>24 Months:</b> {{ formatPrice(twoYears) }}</div>
                         <div><b>36 Months:</b> {{ formatPrice(threeYears) }}</div>
                         <div><b>48 Months:</b> {{ formatPrice(fourYears) }}</div>
-                        <div v-if="chattel != 0"><b>CMF:</b> {{ formatPrice(chattel) }}</div>
-                        <div v-if="insurance != 0"><b>Insurance with AOG:</b> {{ formatPrice(insurance) }}</div>
+                        <div v-if="fiveYears"><b>60 Months:</b> {{ formatPrice(fiveYears) }}</div>
+                        <div v-if="chattel != 0"><b>Chattel Mortgage Fee:</b> {{ formatPrice(chattel) }} Estimated only</div>
+                        <div v-if="insurance != 0"><b>Insurance with AOG:</b> {{ formatPrice(insurance) }} Estimated only</div>
                         <div v-if="others != 0"><b>Others:</b> {{ formatPrice(others) }}</div>
                         <h3 class="red--text">TOTAL CASHOUT: {{ formatPrice(totalEstCashout) }}</h3>
                     </div>
@@ -226,10 +250,13 @@ export default {
         isResultDialog: false,
         isCustom: false,
         showReferenceDialog: false,
+        bank: 'JACCS',
 
         isJackUp: false,
         origPrice: null,
         jackUpPrice: null,
+        jackUpPriceTotal: null,
+        jackUpAF: null,
 
         valid: true,
         rules: [
@@ -255,6 +282,7 @@ export default {
         twoYears: null,
         threeYears: null,
         fourYears: null,
+        fiveYears: null,
 
         headers: [
             {
@@ -302,39 +330,38 @@ export default {
 
             this.isResultDialog = true;
 
-            // let dp = 0;
-
-            // if (this.downPaymentSelect == 20) 
-            // {
-            //     dp = 0.20
-            // } else if (this.downPaymentSelect == 25) {
-            //     dp = 0.25
-            // } else if (this.downPaymentSelect == 30) {
-            //     dp = 0.30
-            // } else if (this.downPaymentSelect == 35) {
-            //     dp = 0.35
-            // } else if (this.downPaymentSelect == 40) {
-            //     dp = 0.40
-            // } else if (this.downPaymentSelect == 45) {
-            //     dp = 0.45
-            // } else if (this.downPaymentSelect == 50) {
-            //     dp = 0.50
-            // } else if (this.downPaymentSelect == 55) {
-            //     dp = 0.55
-            // } else if (this.downPaymentSelect == 60) {
-            //     dp = 0.60
-            // }
-
             this.downPayment = this.unitPrice * (this.downPaymentSelect/100).toFixed(2);
 
             this.amountFinancedPercent = 100 - this.downPaymentSelect;
             
             this.amountFinanced = this.unitPrice - this.downPayment;
 
-            this.oneYear = this.amountFinanced * 1.1285 / 12;
-            this.twoYears = this.amountFinanced * 1.3260 / 24;
-            this.threeYears = this.amountFinanced * 1.4290 / 36;
-            this.fourYears = this.amountFinanced * 1.5440 / 48;
+            if(this.bank == 'JACCS') {
+                this.oneYear = this.amountFinanced * 1.1285 / 12;
+                this.twoYears = this.amountFinanced * 1.3260 / 24;
+                this.threeYears = this.amountFinanced * 1.4290 / 36;
+                this.fourYears = this.amountFinanced * 1.5440 / 48;
+            } else if (this.bank == 'Security Bank') {
+                this.oneYear = this.amountFinanced * 1.1089 / 12;
+                this.twoYears = this.amountFinanced * 1.3017 / 24;
+                this.threeYears = this.amountFinanced * 1.4027 / 36;
+                this.fourYears = this.amountFinanced * 1.5229 / 48;
+            } else if (this.bank == 'Maybank') {
+                this.oneYear = this.amountFinanced * 1.1197 / 12;
+                this.twoYears = this.amountFinanced * 1.3188 / 24;
+                this.threeYears = this.amountFinanced * 1.4151 / 36;
+                this.fourYears = this.amountFinanced * 1.5225 / 48;
+            } else if (this.bank == 'Malayan Bank') {
+                this.oneYear = this.amountFinanced * 1.1302 / 12;
+                this.twoYears = this.amountFinanced * 1.2780 / 24;
+                this.threeYears = this.amountFinanced * 1.3682 / 36;
+                this.fourYears = this.amountFinanced * 1.4691 / 48;
+            } else if (this.bank == 'Brand New') {
+                this.twoYears = this.amountFinanced * 1.2626 / 24;
+                this.threeYears = this.amountFinanced * 1.3858 / 36;
+                this.fourYears = this.amountFinanced * 1.4618 / 48;
+                this.fiveYears = this.amountFinanced * 1.5394 / 60;
+            }
 
             let downpayment = this.downPayment;
             let chattel = this.chattel;
@@ -378,7 +405,13 @@ export default {
             }
 
             this.isResultDialog = true;
-            this.amountFinanced = this.jackUpPrice * 0.70;
+
+            let origprice = this.origPrice;
+            let jackupprice = this.jackUpPrice;
+            
+            this.jackUpPriceTotal = parseInt(origprice) + parseInt(jackupprice);
+
+            this.amountFinanced = this.jackUpPriceTotal * (this.jackUpAF/100).toFixed(2);
             this.downPayment = this.origPrice - this.amountFinanced;
 
             this.oneYear = this.amountFinanced * 1.1285 / 12;
@@ -390,6 +423,9 @@ export default {
             let chattel = this.chattel;
             let insurance = this.insurance;
             let others = this.others;
+            
+            console.log(this.jackUpPriceTotal)
+
 
             this.totalEstCashout = parseInt(downpayment) + parseInt(chattel) + parseInt(insurance) + parseInt(others);
         },
