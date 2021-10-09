@@ -76,9 +76,9 @@ export default {
       orientation: 'portrait',
       icons: [
           {
-              src: 'atphicon.jpg',
+              src: 'icon.png',
               sizes: '196x196',
-              type: 'image/jpg',
+              type: 'image/png',
               purpose: 'any maskable'
           }
       ]
