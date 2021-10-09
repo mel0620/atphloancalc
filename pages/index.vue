@@ -47,6 +47,7 @@
                                 outlined
                                 placeholder="0.00"
                                 :rules="rules"
+                                type="number"
                                 hide-details
                                 class="mt-3"
                             ></v-text-field>
@@ -57,6 +58,7 @@
                                 placeholder="0.00"
                                 outlined
                                 :rules="rules"
+                                type="number"
                                 hide-details
                                 class="mt-3"
                             ></v-text-field>
@@ -93,6 +95,7 @@
                             outlined
                             placeholder="0.00"
                             append-icon="mdi-table"
+                            type="number"
                             @click:append="showReferenceDialog = true"
                         ></v-text-field>
                         <v-text-field
@@ -101,6 +104,7 @@
                             outlined
                             placeholder="0.00"
                             append-icon="mdi-table"
+                            type="number"
                             @click:append="showReferenceDialog = true"
                         ></v-text-field>
                         <v-text-field
@@ -108,6 +112,7 @@
                             label="Others"
                             outlined
                             placeholder="0.00"
+                            type="number"
                         ></v-text-field>
                     </v-form>
                     <v-row>
@@ -184,19 +189,29 @@
         </v-dialog>
         <v-dialog v-model="showReferenceDialog" fullscreen hide-overlay transition="dialog-bottom-transition" >
             <v-card>
-                <v-card-title class="text-h5 primary white--text">
-                    Chattel and Insurance Estimate
-                </v-card-title>
-                <div class="pa-3">
-                    <v-data-table
-                        title="CMF and Insurance Estimate"
-                        :headers="headers"
-                        :items="estimates"
-                        :items-per-page="5"
-                        class="elevation-1 mt-4"
-                    ></v-data-table>
-                </div>
-                <v-card-actions>
+                <v-toolbar dark color="primary" elevation="3" dense class="border-radius-none">
+                    <v-toolbar-title >Chattel and Insurance Estimate</v-toolbar-title>
+                    <v-spacer></v-spacer>
+                    <v-btn icon dark @click="showReferenceDialog = false">
+                        <v-icon>mdi-close</v-icon>
+                    </v-btn>
+                </v-toolbar>
+                <v-sheet
+					id="scrolling-techniques-7"
+                    class="overflow-y-auto bg-light"
+                    max-height="700"
+				>
+                    <div class="pa-3">
+                        <v-data-table
+                            title="CMF and Insurance Estimate"
+                            :headers="headers"
+                            :items="estimates"
+                            :items-per-page="5"
+                            class="elevation-1 mt-4"
+                        ></v-data-table>
+                    </div>
+                </v-sheet>
+                <!-- <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn
                         depressed
@@ -205,7 +220,7 @@
                     >
                         OK
                     </v-btn>
-                </v-card-actions>
+                </v-card-actions> -->
             </v-card>
         </v-dialog>
     </div>
