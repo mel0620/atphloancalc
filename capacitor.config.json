@@ -1,7 +1,1 @@
-{
-  "appId": "atph.loan.calculator",
-  "appName": "ATPHLoanCalculator",
-  "bundledWebRuntime": false,
-  "webDir": "dist",
-  "npmClient": "npm"
-}
+{"appId":"atph.loan.calc","appName":"ATPHLoanCalc","bundledWebRuntime":false,"webDir":"dist"}
