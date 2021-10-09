@@ -84,9 +84,9 @@ export default {
           to: '/reference'
         },
         {
-          icon: 'mdi-facebook',
-          title: 'Facebook',
-          to: '/facebook'
+          icon: 'mdi-domain',
+          title: 'Abous Us',
+          to: '/aboutus'
         },
       ],
       miniVariant: false,
