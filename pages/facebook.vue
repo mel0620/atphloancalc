@@ -18,7 +18,7 @@
         <footer>
           <small>
             <!-- <em>&mdash;</em> -->
-            <em>Visit us on <a href="https://www.facebook.com/autotrustph">Facebook</a></em>
+            <em>Visit us on <a target="_blank" href="https://www.facebook.com/autotrustph">Facebook</a></em>
           </small>
         </footer>
       </blockquote>
