@@ -323,7 +323,7 @@ export default {
             var formatter = new Intl.NumberFormat('en-US', {
                 style: 'currency',
                 currency: 'PHP',
-                minimumFractionDigits: 2
+                minimumFractionDigits: 0
             });
             return formatter.format(value);
         },

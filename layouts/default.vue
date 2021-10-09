@@ -79,10 +79,15 @@ export default {
           to: '/'
         },
         {
+          icon: 'mdi-table',
+          title: 'Reference',
+          to: '/reference'
+        },
+        {
           icon: 'mdi-facebook',
           title: 'Facebook',
           to: '/facebook'
-        }
+        },
       ],
       miniVariant: false,
       right: true,
