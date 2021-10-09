@@ -15,7 +15,7 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/png', href: '/logo.png' }
+      { rel: 'icon', type: 'image/png', href: '/icon.png' }
     ]
   },
 
@@ -59,7 +59,7 @@ export default {
       sha256Fingerprints: ['/* your SHA-256 keys */'],
       /* optional */
       /* overwrite default location for icon */
-      iconPath: '/static/logo.png',
+      iconPath: '/static/icon.png',
       /* Overwrite folder where to put .wellknown */
       distFolder: '.nuxt/dist/client',
     }],
@@ -76,7 +76,7 @@ export default {
       orientation: 'portrait',
       icons: [
           {
-              src: 'atphlogo.jpg',
+              src: 'atphicon.jpg',
               sizes: '196x196',
               type: 'image/jpg',
               purpose: 'any maskable'
