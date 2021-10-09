@@ -15,7 +15,7 @@
           width="150"
         >
       </div>
-      <blockquote class="blockquote">
+      <blockquote class="blockquote text-center">
         &#8220;Used Car Loan, Brand New Car Loan, Sangla OR/CR, Truck & Buss Loan.&#8221;
         <footer>
           <small>

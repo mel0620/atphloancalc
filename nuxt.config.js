@@ -15,7 +15,7 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/png', href: 'icon.png' }
+      { rel: 'icon', type: 'image/jpg', href: '/icon.jpg' }
     ]
   },
 
@@ -76,8 +76,8 @@ export default {
       orientation: 'portrait',
       icons: [
           {
-              src: 'icon.png',
-              sizes: '196x196',
+              src: '/icon.png',
+              sizes: '1500x1500',
               type: 'image/png',
               purpose: 'any maskable'
           }
