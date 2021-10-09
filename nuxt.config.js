@@ -77,7 +77,7 @@ export default {
       icons: [
           {
               src: '/icon.png',
-              sizes: '1500x1500',
+              sizes: '512x512',
               type: 'image/png',
               purpose: 'any maskable'
           }

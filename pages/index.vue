@@ -179,11 +179,11 @@
                         <div><b><span v-if="!isJackUp && !isCustom">{{ downPaymentSelect }}%</span> Down Payment:</b> {{ formatPrice(downPayment) }}</div>
                         <div><b><span v-if="!isJackUp && !isCustom">{{ amountFinancedPercent }}%</span> Amount Financed:</b> {{ formatPrice(amountFinanced) }}</div>
                         <div><b>Terms:</b></div>
-                        <div><b>12 Months:</b> {{ formatPrice(oneYear) }}</div>
+                        <div v-if="bank != 'Brand New'"><b>12 Months:</b> {{ formatPrice(oneYear) }}</div>
                         <div><b>24 Months:</b> {{ formatPrice(twoYears) }}</div>
                         <div><b>36 Months:</b> {{ formatPrice(threeYears) }}</div>
                         <div><b>48 Months:</b> {{ formatPrice(fourYears) }}</div>
-                        <div v-if="fiveYears"><b>60 Months:</b> {{ formatPrice(fiveYears) }}</div>
+                        <div v-if="bank == 'Brand New'"><b>60 Months:</b> {{ formatPrice(fiveYears) }}</div>
                         <div v-if="chattel != 0"><b>Chattel Mortgage Fee:</b> {{ formatPrice(chattel) }} Estimated only</div>
                         <div v-if="insurance != 0"><b>Insurance with AOG:</b> {{ formatPrice(insurance) }} Estimated only</div>
                         <div v-if="others != 0"><b>Others:</b> {{ formatPrice(others) }}</div>
