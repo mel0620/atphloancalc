@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-container>
-            <v-form ref="form"
+            <v-form ref="form" class="mb-4"
                 v-model="valid"
                 lazy-validation
             >
@@ -133,6 +133,7 @@
                             v-model="chattel"
                             label="Chattel Mortgage Fee"
                             outlined
+                            hide-details
                             placeholder="0.00"
                             append-icon="mdi-table"
                             type="number"
@@ -144,6 +145,7 @@
                             v-model="insurance"
                             label="Insurance with AOG"
                             outlined
+                            hide-details
                             placeholder="0.00"
                             append-icon="mdi-table"
                             type="number"
@@ -155,6 +157,7 @@
                             v-model="others"
                             label="Others"
                             outlined
+                            hide-details
                             placeholder="0.00"
                             type="number"
                         ></v-text-field>
