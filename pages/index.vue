@@ -211,7 +211,7 @@
                         <div v-if="chattel != 0"><b>CMF:</b> {{ formatPrice(chattel) }}</div>
                         <div v-if="insurance != 0"><b>Insurance with AOG:</b> {{ formatPrice(insurance) }}</div>
                         <div v-if="others != 0"><b>Others:</b> {{ formatPrice(others) }}</div>
-                        <blockquote class="blockquote text-center pa-0">
+                        <blockquote class="blockquote pa-0">
                             <footer>
                                 <small>
                                     <em>* Aside from the Down Payment you will pay for the Chattel and Comprehensive Insurance with acts of nature.</em>
@@ -234,7 +234,7 @@
                         <div v-if="chattel != 0"><b>Chattel Mortgage Fee:</b> {{ formatPrice(chattel) }} Estimated only</div>
                         <div v-if="insurance != 0"><b>Insurance with AOG:</b> {{ formatPrice(insurance) }} Estimated only</div>
                         <div v-if="others != 0"><b>Others:</b> {{ formatPrice(others) }}</div>
-                        <blockquote class="blockquote text-center pa-0">
+                        <blockquote class="blockquote pa-0">
                             <footer>
                                 <small>
                                     <em>* Aside from the Down Payment you will pay for the Chattel and Comprehensive Insurance with acts of nature.</em>
