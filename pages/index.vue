@@ -215,8 +215,8 @@
                                 </small>
                             </footer>
                         </blockquote>
-                        <div v-if="chattel != 0"><b>CMF:</b> {{ formatPrice(chattel) }}</div>
-                        <div v-if="insurance != 0"><b>Insurance with AOG:</b> {{ formatPrice(insurance) }}</div>
+                        <div v-if="chattel != 0"><b>Chattel:</b> {{ formatPrice(chattel) }} Estimated only</div>
+                        <div v-if="insurance != 0"><b>Insurance:</b> {{ formatPrice(insurance) }} Estimated only</div>
                         <div v-if="others != 0"><b>Others:</b> {{ formatPrice(others) }}</div>
                         <h3 class="red--text">ESTIMATED CASHOUT: {{ formatPrice(totalEstCashout) }}</h3>
                     </div>
@@ -238,8 +238,8 @@
                                 </small>
                             </footer>
                         </blockquote>
-                        <div v-if="chattel != 0"><b>Chattel Mortgage Fee:</b> {{ formatPrice(chattel) }} Estimated only</div>
-                        <div v-if="insurance != 0"><b>Insurance with AOG:</b> {{ formatPrice(insurance) }} Estimated only</div>
+                        <div v-if="chattel != 0"><b>Chattel:</b> {{ formatPrice(chattel) }} Estimated only</div>
+                        <div v-if="insurance != 0"><b>Insurance:</b> {{ formatPrice(insurance) }} Estimated only</div>
                         <div v-if="others != 0"><b>Others:</b> {{ formatPrice(others) }}</div>
                         <h3 class="red--text">ESTIMATED CASHOUT: {{ formatPrice(totalEstCashout) }}</h3>
                     </div>
