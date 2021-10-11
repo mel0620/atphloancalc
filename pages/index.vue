@@ -200,13 +200,20 @@
                         <div><b>Down Payment:</b> {{ formatPrice(downPayment) }}</div>
                         <div><b>Amount Financed:</b> {{ formatPrice(amountFinanced) }}</div>
                         <div><b>Terms:</b></div>
-                        <div><b>12 Months:</b> {{ formatPrice(oneYear) }}</div>
+                        <!-- <div><b>12 Months:</b> {{ formatPrice(oneYear) }}</div> -->
                         <div><b>24 Months:</b> {{ formatPrice(twoYears) }}</div>
                         <div><b>36 Months:</b> {{ formatPrice(threeYears) }}</div>
                         <div><b>48 Months:</b> {{ formatPrice(fourYears) }}</div>
                         <div v-if="chattel != 0"><b>CMF:</b> {{ formatPrice(chattel) }}</div>
                         <div v-if="insurance != 0"><b>Insurance with AOG:</b> {{ formatPrice(insurance) }}</div>
                         <div v-if="others != 0"><b>Others:</b> {{ formatPrice(others) }}</div>
+                        <blockquote class="blockquote text-center pa-0">
+                            <footer>
+                                <small>
+                                    <em>* Aside from the Down Payment you will pay for the Chattel and Comprehensive Insurance with acts of nature.</em>
+                                </small> | 
+                            </footer>
+                        </blockquote>
                         <h3 class="red--text">TOTAL CASHOUT: {{ formatPrice(totalEstCashout) }}</h3>
                     </div>
                     <div v-else class="result mt-3">
@@ -223,6 +230,13 @@
                         <div v-if="chattel != 0"><b>Chattel Mortgage Fee:</b> {{ formatPrice(chattel) }} Estimated only</div>
                         <div v-if="insurance != 0"><b>Insurance with AOG:</b> {{ formatPrice(insurance) }} Estimated only</div>
                         <div v-if="others != 0"><b>Others:</b> {{ formatPrice(others) }}</div>
+                        <blockquote class="blockquote text-center pa-0">
+                            <footer>
+                                <small>
+                                    <em>* Aside from the Down Payment you will pay for the Chattel and Comprehensive Insurance with acts of nature.</em>
+                                </small> | 
+                            </footer>
+                        </blockquote>
                         <h3 class="red--text">TOTAL CASHOUT: {{ formatPrice(totalEstCashout) }}</h3>
                     </div>
                 </v-card-text>
