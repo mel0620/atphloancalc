@@ -37,6 +37,7 @@
                                     outlined
                                     placeholder="0.00"
                                     :rules="rules"
+                                    type="number"
                                     hide-details
                                     class="mt-3"
                                 ></v-text-field>
@@ -48,6 +49,7 @@
                                     outlined
                                     placeholder="0.00"
                                     :rules="rules"
+                                    type="number"
                                     hide-details
                                     class="mt-3"
                                 ></v-text-field>
@@ -61,6 +63,7 @@
                                     placeholder="0%"
                                     outlined
                                     :rules="rules"
+                                    type="number"
                                     hide-details
                                     class="mt-3"
                                 ></v-combobox>
@@ -100,6 +103,7 @@
                                     placeholder="0%"
                                     outlined
                                     :rules="rules"
+                                    type="number"
                                     hide-details
                                     class="mt-3"
                                 ></v-combobox>
@@ -482,6 +486,9 @@ export default {
         clear() {
             this.$refs.form.resetValidation();
             this.unitPrice = 0;
+            this.origPrice = 0;
+            this.jackUpPrice = 0;
+            this.dpCustom = 0;
             this.chattel = 0;
             this.insurance = 0;
             this.others = 0;
