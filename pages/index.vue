@@ -211,7 +211,7 @@
                         <blockquote class="blockquote pa-0">
                             <footer>
                                 <small>
-                                    <em>* Aside from the Down Payment you will pay for the Chattel and Comprehensive Insurance with acts of nature.</em>
+                                    <em>* Aside from the Down Payment, you will pay for the Chattel and Comprehensive Insurance with acts of nature.</em>
                                 </small>
                             </footer>
                         </blockquote>
@@ -234,7 +234,7 @@
                         <blockquote class="blockquote pa-0">
                             <footer>
                                 <small>
-                                    <em>* Aside from the Down Payment you will pay for the Chattel and Comprehensive Insurance with acts of nature.</em>
+                                    <em>* Aside from the Down Payment, you will pay for the Chattel and Comprehensive Insurance with acts of nature.</em>
                                 </small>
                             </footer>
                         </blockquote>
