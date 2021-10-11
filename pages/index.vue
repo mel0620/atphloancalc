@@ -226,7 +226,7 @@
                         <div><b><span v-if="!isJackUp && !isCustom">{{ downPaymentSelect }}%</span> Down Payment:</b> {{ formatPrice(downPayment) }}</div>
                         <div><b><span v-if="!isJackUp && !isCustom">{{ amountFinancedPercent }}%</span> Amount Financed:</b> {{ formatPrice(amountFinanced) }}</div>
                         <div><b>Terms:</b></div>
-                        <div v-if="bank != 'Brand New'"><b>12 Months:</b> {{ formatPrice(oneYear) }}</div>
+                        <!-- <div v-if="bank != 'Brand New'"><b>12 Months:</b> {{ formatPrice(oneYear) }}</div> -->
                         <div><b>24 Months:</b> {{ formatPrice(twoYears) }}</div>
                         <div><b>36 Months:</b> {{ formatPrice(threeYears) }}</div>
                         <div><b>48 Months:</b> {{ formatPrice(fourYears) }}</div>
