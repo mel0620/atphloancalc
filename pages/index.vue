@@ -63,6 +63,7 @@
                                     placeholder="0%"
                                     outlined
                                     :rules="rules"
+                                    type="number"
                                     hide-details
                                     class="mt-3"
                                 ></v-combobox>
@@ -102,6 +103,7 @@
                                     placeholder="0%"
                                     outlined
                                     :rules="rules"
+                                    type="number"
                                     hide-details
                                     class="mt-3"
                                 ></v-combobox>
