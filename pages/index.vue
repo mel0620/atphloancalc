@@ -422,6 +422,12 @@ export default {
             let insurance = this.insurance;
             let others = this.others;
 
+            if (chattel == '' && insurance == '' && others == '') {
+                chattel = 0;
+                insurance = 0;
+                others = 0;
+            }
+
             this.totalEstCashout = parseInt(downpayment) + parseInt(chattel) + parseInt(insurance) + parseInt(others);
 
             console.log(this.downPayment)
@@ -448,6 +454,12 @@ export default {
             let chattel = this.chattel;
             let insurance = this.insurance;
             let others = this.others;
+
+            if (chattel == '' && insurance == '' && others == '') {
+                chattel = 0;
+                insurance = 0;
+                others = 0;
+            }
 
             this.totalEstCashout = parseInt(downpayment) + parseInt(chattel) + parseInt(insurance) + parseInt(others);
 
@@ -480,6 +492,11 @@ export default {
             
             console.log(this.jackUpPriceTotal)
 
+            if (chattel == '' && insurance == '' && others == '') {
+                chattel = 0;
+                insurance = 0;
+                others = 0;
+            }
 
             this.totalEstCashout = parseInt(downpayment) + parseInt(chattel) + parseInt(insurance) + parseInt(others);
         },
