@@ -37,6 +37,7 @@
                                     outlined
                                     placeholder="0.00"
                                     :rules="rules"
+                                    type="number"
                                     hide-details
                                     class="mt-3"
                                 ></v-text-field>
@@ -48,6 +49,7 @@
                                     outlined
                                     placeholder="0.00"
                                     :rules="rules"
+                                    type="number"
                                     hide-details
                                     class="mt-3"
                                 ></v-text-field>
