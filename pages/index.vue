@@ -208,9 +208,6 @@
                         <div><b>24 Months:</b> {{ formatPrice(twoYears) }}</div>
                         <div><b>36 Months:</b> {{ formatPrice(threeYears) }}</div>
                         <div><b>48 Months:</b> {{ formatPrice(fourYears) }}</div>
-                        <div v-if="chattel != 0"><b>CMF:</b> {{ formatPrice(chattel) }}</div>
-                        <div v-if="insurance != 0"><b>Insurance with AOG:</b> {{ formatPrice(insurance) }}</div>
-                        <div v-if="others != 0"><b>Others:</b> {{ formatPrice(others) }}</div>
                         <blockquote class="blockquote pa-0">
                             <footer>
                                 <small>
@@ -218,6 +215,9 @@
                                 </small>
                             </footer>
                         </blockquote>
+                        <div v-if="chattel != 0"><b>CMF:</b> {{ formatPrice(chattel) }}</div>
+                        <div v-if="insurance != 0"><b>Insurance with AOG:</b> {{ formatPrice(insurance) }}</div>
+                        <div v-if="others != 0"><b>Others:</b> {{ formatPrice(others) }}</div>
                         <h3 class="red--text">TOTAL CASHOUT: {{ formatPrice(totalEstCashout) }}</h3>
                     </div>
                     <div v-else class="result mt-3">
@@ -231,9 +231,6 @@
                         <div><b>36 Months:</b> {{ formatPrice(threeYears) }}</div>
                         <div><b>48 Months:</b> {{ formatPrice(fourYears) }}</div>
                         <div v-if="bank == 'Brand New'"><b>60 Months:</b> {{ formatPrice(fiveYears) }}</div>
-                        <div v-if="chattel != 0"><b>Chattel Mortgage Fee:</b> {{ formatPrice(chattel) }} Estimated only</div>
-                        <div v-if="insurance != 0"><b>Insurance with AOG:</b> {{ formatPrice(insurance) }} Estimated only</div>
-                        <div v-if="others != 0"><b>Others:</b> {{ formatPrice(others) }}</div>
                         <blockquote class="blockquote pa-0">
                             <footer>
                                 <small>
@@ -241,6 +238,9 @@
                                 </small>
                             </footer>
                         </blockquote>
+                        <div v-if="chattel != 0"><b>Chattel Mortgage Fee:</b> {{ formatPrice(chattel) }} Estimated only</div>
+                        <div v-if="insurance != 0"><b>Insurance with AOG:</b> {{ formatPrice(insurance) }} Estimated only</div>
+                        <div v-if="others != 0"><b>Others:</b> {{ formatPrice(others) }}</div>
                         <h3 class="red--text">TOTAL CASHOUT: {{ formatPrice(totalEstCashout) }}</h3>
                     </div>
                 </v-card-text>
