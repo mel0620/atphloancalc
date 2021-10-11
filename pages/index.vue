@@ -215,7 +215,7 @@
                             <footer>
                                 <small>
                                     <em>* Aside from the Down Payment you will pay for the Chattel and Comprehensive Insurance with acts of nature.</em>
-                                </small> | 
+                                </small>
                             </footer>
                         </blockquote>
                         <h3 class="red--text">TOTAL CASHOUT: {{ formatPrice(totalEstCashout) }}</h3>
@@ -238,7 +238,7 @@
                             <footer>
                                 <small>
                                     <em>* Aside from the Down Payment you will pay for the Chattel and Comprehensive Insurance with acts of nature.</em>
-                                </small> | 
+                                </small>
                             </footer>
                         </blockquote>
                         <h3 class="red--text">TOTAL CASHOUT: {{ formatPrice(totalEstCashout) }}</h3>
