@@ -6,7 +6,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - Loan Calculator',
+    // titleTemplate: '%s - Loan Calculator',
     title: 'AutoTrustPH Loan Calculator',
     meta: [
       { charset: 'utf-8' },
