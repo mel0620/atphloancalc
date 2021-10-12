@@ -78,15 +78,15 @@ export default {
           title: 'Loan Calculator',
           to: '/'
         },
-        // {
-        //   icon: 'mdi-table',
-        //   title: 'Reference',
-        //   to: '/reference'
-        // },
         {
-          icon: 'mdi-domain',
-          title: 'Abous Us',
+          icon: 'mdi-account-multiple-outline',
+          title: 'About Us',
           to: '/aboutus'
+        },
+        {
+          icon: 'mdi-phone',
+          title: 'Contact Us',
+          to: '/contactus'
         },
       ],
       miniVariant: false,
