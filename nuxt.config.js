@@ -6,7 +6,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - ATPH Loan Calculator',
+    titleTemplate: '%s - Loan Calculator',
     title: 'AutoTrustPH Loan Calculator',
     meta: [
       { charset: 'utf-8' },
@@ -60,7 +60,7 @@ export default {
       sha256Fingerprints: ['/* your SHA-256 keys */'],
       /* optional */
       /* overwrite default location for icon */
-      iconPath: '/static/icon.png',
+      iconPath: '/static/icon.jpg',
       /* Overwrite folder where to put .wellknown */
       distFolder: '.nuxt/dist/client',
     }],
@@ -90,7 +90,7 @@ export default {
       // ]
     },
     icon: {
-      fileName: 'icon.png',
+      fileName: 'icon.jpg',
       sizes: [64, 120, 144, 152, 192, 384, 512]
     },
   },
