@@ -72,7 +72,7 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     icon: {
-      source: 'icon.png',
+      fileName: 'icon.png',
     },
     meta: {
       title: 'ATPH Loan Calculator',
@@ -80,16 +80,17 @@ export default {
     },
     manifest: {
       name: 'ATPH Loan Calculator',
+      short_name: 'Loan Calculator',
       lang: 'en',
       orientation: 'portrait',
-      icons: [
-          {
-              src: 'icon.png',
-              sizes: '512x512',
-              type: 'image/png',
-              purpose: 'any maskable'
-          }
-      ]
+      // icons: [
+      //     {
+      //         src: 'static/icon.png',
+      //         sizes: '512x512',
+      //         type: 'image/png',
+      //         purpose: 'any maskable'
+      //     }
+      // ]
     }
   },
 
