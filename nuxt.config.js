@@ -72,15 +72,19 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     icon: {
-      source: 'static/icon.png',
+      source: 'icon.png',
+    },
+    meta: {
+      title: 'ATPH Loan Calculator',
+      author: 'Rommel Cuneta'
     },
     manifest: {
-      name: 'ATPH\'s Loan Calculator',
+      name: 'ATPH Loan Calculator',
       lang: 'en',
       orientation: 'portrait',
       icons: [
           {
-              src: 'static/icon.png',
+              src: 'icon.png',
               sizes: '512x512',
               type: 'image/png',
               purpose: 'any maskable'
