@@ -21,7 +21,6 @@
     "@capacitor/core": "^2.5.0",
     "@nuxt/content": "^1.14.0",
     "@nuxtjs/axios": "^5.13.6",
-    "@nuxtjs/pwa": "^3.3.5",
     "core-js": "^3.15.1",
     "nuxt": "^2.15.7",
     "vuetify": "^2.5.5",
@@ -30,6 +29,7 @@
   "devDependencies": {
     "@capacitor/cli": "^2.5.0",
     "@nklayman/vue-cli-plugin-capacitor": "~0.4.0",
+    "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/vuetify": "^1.12.1",
     "electron": "^13.0.0",
     "electron-devtools-installer": "^3.1.0",
