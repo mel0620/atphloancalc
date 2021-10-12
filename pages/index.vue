@@ -502,6 +502,7 @@ export default {
         },
         clear() {
             this.$refs.form.resetValidation();
+            this.unitDetails = '';
             this.unitPrice = 0;
             this.origPrice = 0;
             this.jackUpPrice = 0;
