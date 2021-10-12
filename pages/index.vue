@@ -429,8 +429,6 @@ export default {
             }
 
             this.totalEstCashout = parseInt(downpayment) + parseInt(chattel) + parseInt(insurance) + parseInt(others);
-
-            console.log(this.downPayment)
         },
         computeCustom() {
 
@@ -463,7 +461,6 @@ export default {
 
             this.totalEstCashout = parseInt(downpayment) + parseInt(chattel) + parseInt(insurance) + parseInt(others);
 
-            console.log(this.totalEstCashout)
         },
         computeJackUp() {
             if (!this.$refs.form.validate()) {
@@ -490,8 +487,6 @@ export default {
             let insurance = this.insurance;
             let others = this.others;
             
-            console.log(this.jackUpPriceTotal)
-
             if (chattel == '' && insurance == '' && others == '') {
                 chattel = 0;
                 insurance = 0;
@@ -517,7 +512,7 @@ export default {
                 currency: 'PHP',
                 minimumFractionDigits: 0
             });
-            return formatter.format(value);
+            return formatter.format(Math.round(value));
         },
     }
 }
