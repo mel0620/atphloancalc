@@ -203,12 +203,12 @@
                         <div><b>Jack-up Price:</b> {{ formatPrice(jackUpPriceTotal) }}</div>
                         <div><b>Down Payment:</b> {{ formatPrice(downPayment) }}</div>
                         <div><b>Amount Financed:</b> {{ formatPrice(amountFinanced) }}</div>
-                        <div><b>Terms:</b></div>
+                        <!-- <div><b>Terms:</b></div> -->
                         <!-- <div><b>12 Months:</b> {{ formatPrice(oneYear) }}</div> -->
-                        <div><b>24 Months:</b> {{ formatPrice(twoYears) }}</div>
-                        <div><b>36 Months:</b> {{ formatPrice(threeYears) }}</div>
-                        <div><b>48 Months:</b> {{ formatPrice(fourYears) }}</div>
-                        <blockquote class="blockquote pa-0">
+                        <div><b>24 Months Term:</b> {{ formatPrice(twoYears) }}</div>
+                        <div><b>36 Months Term:</b> {{ formatPrice(threeYears) }}</div>
+                        <div><b>48 Months Term:</b> {{ formatPrice(fourYears) }}</div>
+                        <blockquote v-if="chattel == 0 && insurance == 0" class="blockquote pa-0">
                             <footer>
                                 <small>
                                     <em>* Aside from the Down Payment, you will pay for the Chattel and Comprehensive Insurance with acts of nature.</em>
@@ -218,20 +218,20 @@
                         <div v-if="chattel != 0"><b>Chattel:</b> {{ formatPrice(chattel) }} Estimated only</div>
                         <div v-if="insurance != 0"><b>Insurance:</b> {{ formatPrice(insurance) }} Estimated only</div>
                         <div v-if="others != 0"><b>Others:</b> {{ formatPrice(others) }}</div>
-                        <h3 class="red--text">ESTIMATED CASHOUT: {{ formatPrice(totalEstCashout) }}</h3>
+                        <h3 class="red--text" v-if="chattel != 0 && insurance != 0">ESTIMATED CASHOUT: {{ formatPrice(totalEstCashout) }}</h3>
                     </div>
                     <div v-else class="result mt-3">
                         <div><h3>{{ unitDetails }}</h3></div>
                         <div><b>Unit Price:</b> {{ formatPrice(unitPrice) }}</div>
                         <div><b><span v-if="!isJackUp && !isCustom">{{ downPaymentSelect }}%</span> Down Payment:</b> {{ formatPrice(downPayment) }}</div>
                         <div><b><span v-if="!isJackUp && !isCustom">{{ amountFinancedPercent }}%</span> Amount Financed:</b> {{ formatPrice(amountFinanced) }}</div>
-                        <div><b>Terms:</b></div>
+                        <!-- <div><b>Terms:</b></div> -->
                         <!-- <div v-if="bank != 'Brand New'"><b>12 Months:</b> {{ formatPrice(oneYear) }}</div> -->
-                        <div><b>24 Months:</b> {{ formatPrice(twoYears) }}</div>
-                        <div><b>36 Months:</b> {{ formatPrice(threeYears) }}</div>
-                        <div><b>48 Months:</b> {{ formatPrice(fourYears) }}</div>
+                        <div><b>24 Months Term:</b> {{ formatPrice(twoYears) }}</div>
+                        <div><b>36 Months Term:</b> {{ formatPrice(threeYears) }}</div>
+                        <div><b>48 Months Term:</b> {{ formatPrice(fourYears) }}</div>
                         <div v-if="bank == 'Brand New'"><b>60 Months:</b> {{ formatPrice(fiveYears) }}</div>
-                        <blockquote class="blockquote pa-0">
+                        <blockquote v-if="chattel == 0 && insurance == 0" class="blockquote pa-0">
                             <footer>
                                 <small>
                                     <em>* Aside from the Down Payment, you will pay for the Chattel and Comprehensive Insurance with acts of nature.</em>
@@ -241,7 +241,7 @@
                         <div v-if="chattel != 0"><b>Chattel:</b> {{ formatPrice(chattel) }} Estimated only</div>
                         <div v-if="insurance != 0"><b>Insurance:</b> {{ formatPrice(insurance) }} Estimated only</div>
                         <div v-if="others != 0"><b>Others:</b> {{ formatPrice(others) }}</div>
-                        <h3 class="red--text">ESTIMATED CASHOUT: {{ formatPrice(totalEstCashout) }}</h3>
+                        <h3 class="red--text" v-if="chattel != 0 && insurance != 0">ESTIMATED CASHOUT: {{ formatPrice(totalEstCashout) }}</h3>
                     </div>
                 </v-card-text>
 
