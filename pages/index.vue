@@ -249,13 +249,7 @@
 
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn
-                        depressed
-                        color="primary"
-                        @click="isResultDialog = false"
-                    >
-                        OK
-                    </v-btn>
+                    <v-btn depressed color="primary" @click="isResultDialog = false">OK</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
