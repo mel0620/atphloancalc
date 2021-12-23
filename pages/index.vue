@@ -231,7 +231,7 @@
                         <div><b>36 Months Term:</b> {{ formatPrice(threeYears) }}</div>
                         <div><b>48 Months Term:</b> {{ formatPrice(fourYears) }}</div>
                         <div v-if="bank == 'Brand New'"><b>60 Months Term:</b> {{ formatPrice(fiveYears) }}</div>
-                        <blockquote v-if="chattel == 0 && insurance == 0" class="blockquote pa-0">
+                        <blockquote v-if="chattel == 0 && insurance == 0 && bank != 'Brand New'" class="blockquote pa-0">
                             <footer>
                                 <small>
                                     <em>* Aside from the Down Payment, you will pay for the Chattel and Comprehensive Insurance with acts of nature.</em>
