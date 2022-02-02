@@ -437,10 +437,37 @@ export default {
 
             // this.downPayment = this.unitPrice * (this.dpCustom/100).toFixed(2);
 
+            if(this.bank == 'JACCS') {
+                // this.oneYear = this.amountFinanced * 1.1285 / 12;
+                this.twoYears = this.amountFinanced * 1.3260 / 24;
+                this.threeYears = this.amountFinanced * 1.4290 / 36;
+                this.fourYears = this.amountFinanced * 1.5440 / 48;
+            } else if (this.bank == 'Security Bank') {
+                // this.oneYear = this.amountFinanced * 1.1089 / 12;
+                this.twoYears = this.amountFinanced * 1.3017 / 24;
+                this.threeYears = this.amountFinanced * 1.4027 / 36;
+                this.fourYears = this.amountFinanced * 1.5229 / 48;
+            } else if (this.bank == 'Maybank') {
+                // this.oneYear = this.amountFinanced * 1.1197 / 12;
+                this.twoYears = this.amountFinanced * 1.3188 / 24;
+                this.threeYears = this.amountFinanced * 1.4151 / 36;
+                this.fourYears = this.amountFinanced * 1.5225 / 48;
+            } else if (this.bank == 'Malayan Bank') {
+                // this.oneYear = this.amountFinanced * 1.1302 / 12;
+                this.twoYears = this.amountFinanced * 1.2780 / 24;
+                this.threeYears = this.amountFinanced * 1.3682 / 36;
+                this.fourYears = this.amountFinanced * 1.4691 / 48;
+            } else if (this.bank == 'Brand New') {
+                this.twoYears = this.amountFinanced * 1.2626 / 24;
+                this.threeYears = this.amountFinanced * 1.3858 / 36;
+                this.fourYears = this.amountFinanced * 1.4618 / 48;
+                this.fiveYears = this.amountFinanced * 1.5394 / 60;
+            }
+
             // this.oneYear = this.amountFinanced * 1.1285 / 12;
-            this.twoYears = this.amountFinanced * 1.3260 / 24;
-            this.threeYears = this.amountFinanced * 1.4290 / 36;
-            this.fourYears = this.amountFinanced * 1.5440 / 48;
+            // this.twoYears = this.amountFinanced * 1.3260 / 24;
+            // this.threeYears = this.amountFinanced * 1.4290 / 36;
+            // this.fourYears = this.amountFinanced * 1.5440 / 48;
 
             let downpayment = this.downPayment;
             let chattel = this.chattel;
