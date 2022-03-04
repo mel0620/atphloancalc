@@ -433,6 +433,7 @@ export default {
             this.isResultDialog = true;
 
             this.downPayment = this.dpCustom;
+            
             this.amountFinanced = this.unitPrice - this.downPayment;
 
             // this.downPayment = this.unitPrice * (this.dpCustom/100).toFixed(2);
