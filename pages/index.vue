@@ -391,9 +391,9 @@ export default {
                 this.fourYears = this.amountFinanced * 1.5440 / 48;
             } else if (this.bank == 'Security Bank') {
                 // this.oneYear = this.amountFinanced * 1.1089 / 12;
-                this.twoYears = this.amountFinanced * 1.3017 / 24;
-                this.threeYears = this.amountFinanced * 1.4027 / 36;
-                this.fourYears = this.amountFinanced * 1.5229 / 48;
+                this.twoYears = this.amountFinanced * 1.3260 / 24;
+                this.threeYears = this.amountFinanced * 1.4273 / 36;
+                this.fourYears = this.amountFinanced * 1.5426 / 48;
             } else if (this.bank == 'Maybank') {
                 // this.oneYear = this.amountFinanced * 1.1197 / 12;
                 this.twoYears = this.amountFinanced * 1.3188 / 24;
