@@ -390,7 +390,7 @@ export default {
                 this.threeYears = this.amountFinanced * 1.4493 / 36;
                 this.fourYears = this.amountFinanced * 1.5729 / 48;
             } else if (this.bank == 'Security Bank') {
-                // this.oneYear = this.amountFinanced * 1.1089 / 12;
+                // this.oneYear = this.amountFinanced * 1.1280 / 12;
                 this.twoYears = this.amountFinanced * 1.3260 / 24;
                 this.threeYears = this.amountFinanced * 1.4273 / 36;
                 this.fourYears = this.amountFinanced * 1.5426 / 48;
@@ -401,9 +401,9 @@ export default {
                 this.fourYears = this.amountFinanced * 1.5225 / 48;
             } else if (this.bank == 'Malayan Bank') {
                 // this.oneYear = this.amountFinanced * 1.1302 / 12;
-                this.twoYears = this.amountFinanced * 1.2780 / 24;
-                this.threeYears = this.amountFinanced * 1.3682 / 36;
-                this.fourYears = this.amountFinanced * 1.4691 / 48;
+                this.twoYears = this.amountFinanced * 1.3236 / 24;
+                this.threeYears = this.amountFinanced * 1.4172 / 36;
+                this.fourYears = this.amountFinanced * 1.5216 / 48;
             } else if (this.bank == 'Brand New') {
                 this.twoYears = this.amountFinanced * 1.2626 / 24;
                 this.threeYears = this.amountFinanced * 1.3858 / 36;
@@ -444,7 +444,7 @@ export default {
                 this.threeYears = this.amountFinanced * 1.4493 / 36;
                 this.fourYears = this.amountFinanced * 1.5729 / 48;
             } else if (this.bank == 'Security Bank') {
-                // this.oneYear = this.amountFinanced * 1.1089 / 12;
+                // this.oneYear = this.amountFinanced * 1.1280 / 12;
                 this.twoYears = this.amountFinanced * 1.3017 / 24;
                 this.threeYears = this.amountFinanced * 1.4027 / 36;
                 this.fourYears = this.amountFinanced * 1.5229 / 48;
@@ -455,9 +455,9 @@ export default {
                 this.fourYears = this.amountFinanced * 1.5225 / 48;
             } else if (this.bank == 'Malayan Bank') {
                 // this.oneYear = this.amountFinanced * 1.1302 / 12;
-                this.twoYears = this.amountFinanced * 1.2780 / 24;
-                this.threeYears = this.amountFinanced * 1.3682 / 36;
-                this.fourYears = this.amountFinanced * 1.4691 / 48;
+                this.twoYears = this.amountFinanced * 1.3236 / 24;
+                this.threeYears = this.amountFinanced * 1.4172 / 36;
+                this.fourYears = this.amountFinanced * 1.5216 / 48;
             } else if (this.bank == 'Brand New') {
                 this.twoYears = this.amountFinanced * 1.2626 / 24;
                 this.threeYears = this.amountFinanced * 1.3858 / 36;
