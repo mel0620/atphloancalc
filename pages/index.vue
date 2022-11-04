@@ -45,7 +45,7 @@
                             <v-col cols="12">
                                 <v-text-field
                                     v-model="jackUpPrice"
-                                    label="Jack-up Price"
+                                    label="Additional"
                                     outlined
                                     placeholder="0.00"
                                     :rules="rules"

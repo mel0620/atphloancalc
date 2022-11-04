@@ -21,8 +21,8 @@
           <small>
             <!-- <em>&mdash;</em> -->
             <em>Visit us on <a target="_blank" href="https://www.facebook.com/autotrustph">Facebook</a></em>
-          </small> | 
-          <small><a target="_blank" href="https://www.autotrustph.com">www.autotrustph.com</a></small>
+          </small>
+          <!-- <small><a target="_blank" href="https://www.autotrustph.com">www.autotrustph.com</a></small> -->
         </footer>
       </blockquote>
     </v-col>
