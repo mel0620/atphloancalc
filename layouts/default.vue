@@ -56,12 +56,12 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <!-- <v-footer
+    <v-footer
       :absolute="!fixed"
       app
     >
       <span>&copy; AutoTrust Philippines Inc. {{ new Date().getFullYear() }}</span>
-    </v-footer> -->
+    </v-footer>
   </v-app>
 </template>
 
