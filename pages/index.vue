@@ -18,7 +18,7 @@
                     <v-col cols="12">
                         <v-combobox
                             v-model="bank"
-                            :items="['JACCS','Security Bank','Maybank','Malayan Bank','Brand New']"
+                            :items="['JACCS','Security Bank','Maybank','Malayan Bank','Brand New', 'Motor Cycle']"
                             prepend-inner-icon="mdi-bank"
                             label="Financing"
                             placeholder="Select Bank/Financing Company"
@@ -226,10 +226,10 @@
                         <div><b><span v-if="!isJackUp && !isCustom">{{ downPaymentSelect }}%</span> Down Payment:</b> {{ formatPrice(downPayment) }}</div>
                         <div><b><span v-if="!isJackUp && !isCustom">{{ amountFinancedPercent }}%</span> Amount Financed:</b> {{ formatPrice(amountFinanced) }}</div>
                         <!-- <div><b>Terms:</b></div> -->
-                        <!-- <div v-if="bank != 'Brand New'"><b>12 Months:</b> {{ formatPrice(oneYear) }}</div> -->
+                        <div v-if="bank == 'Motor Cycle'"><b>12 Months:</b> {{ formatPrice(oneYear) }}</div>
                         <div><b>24 Months Term:</b> {{ formatPrice(twoYears) }}</div>
                         <div><b>36 Months Term:</b> {{ formatPrice(threeYears) }}</div>
-                        <div><b>48 Months Term:</b> {{ formatPrice(fourYears) }}</div>
+                        <div v-if="bank != 'Motor Cycle'"><b>48 Months Term:</b> {{ formatPrice(fourYears) }}</div>
                         <div v-if="bank == 'Brand New'"><b>60 Months Term:</b> {{ formatPrice(fiveYears) }}</div>
                         <blockquote v-if="chattel == 0 && insurance == 0 && bank != 'Brand New'" class="blockquote pa-0">
                             <footer>
@@ -409,7 +409,12 @@ export default {
                 this.threeYears = this.amountFinanced * 1.3858 / 36;
                 this.fourYears = this.amountFinanced * 1.4618 / 48;
                 this.fiveYears = this.amountFinanced * 1.5394 / 60;
+            } else if (this.bank == 'Motor Cycle' {
+                this.oneYear = this.amountFinanced * 1.11 / 12;
+                this.twoYears = this.amountFinanced * 1.2670 / 24;
+                this.threeYears = this.amountFinanced * 1.3796 / 36;
             }
+
 
             let downpayment = this.downPayment;
             let chattel = this.chattel;
@@ -463,6 +468,10 @@ export default {
                 this.threeYears = this.amountFinanced * 1.3858 / 36;
                 this.fourYears = this.amountFinanced * 1.4618 / 48;
                 this.fiveYears = this.amountFinanced * 1.5394 / 60;
+            } else if (this.bank == 'Motor Cycle' {
+                this.oneYear = this.amountFinanced * 1.11 / 12;
+                this.twoYears = this.amountFinanced * 1.2670 / 24;
+                this.threeYears = this.amountFinanced * 1.3796 / 36;
             }
 
             let downpayment = this.downPayment;
