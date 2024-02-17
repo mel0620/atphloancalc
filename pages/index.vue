@@ -409,7 +409,7 @@ export default {
                 this.threeYears = this.amountFinanced * 1.3858 / 36;
                 this.fourYears = this.amountFinanced * 1.4618 / 48;
                 this.fiveYears = this.amountFinanced * 1.5394 / 60;
-            } else if (this.bank == 'Motor Cycle' {
+            } else if (this.bank == 'Motor Cycle') {
                 this.oneYear = this.amountFinanced * 1.11 / 12;
                 this.twoYears = this.amountFinanced * 1.2670 / 24;
                 this.threeYears = this.amountFinanced * 1.3796 / 36;
@@ -468,7 +468,7 @@ export default {
                 this.threeYears = this.amountFinanced * 1.3858 / 36;
                 this.fourYears = this.amountFinanced * 1.4618 / 48;
                 this.fiveYears = this.amountFinanced * 1.5394 / 60;
-            } else if (this.bank == 'Motor Cycle' {
+            } else if (this.bank == 'Motor Cycle') {
                 this.oneYear = this.amountFinanced * 1.11 / 12;
                 this.twoYears = this.amountFinanced * 1.2670 / 24;
                 this.threeYears = this.amountFinanced * 1.3796 / 36;
