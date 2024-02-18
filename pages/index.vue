@@ -415,7 +415,6 @@ export default {
                 this.threeYears = this.amountFinanced * 1.3796 / 36;
             }
 
-
             let downpayment = this.downPayment;
             let chattel = this.chattel;
             let insurance = this.insurance;

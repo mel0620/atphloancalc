@@ -92,7 +92,7 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'ATPH Loan Calculator'
+      title: 'Loan Calculator'
     }
   }
 }
