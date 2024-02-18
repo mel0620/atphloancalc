@@ -105,7 +105,7 @@ export default {
       dark: false,
       themes: {
         light: {
-          primary: '#800000',
+          primary: colors.red.darken4,
           secondary: colors.red.lighten4, // #FFCDD2
           accent: colors.indigo.base, // #3F51B5
         },

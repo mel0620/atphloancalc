@@ -60,7 +60,7 @@
       :absolute="!fixed"
       app
     >
-      <span>&copy; AutoTrust Philippines Inc. {{ new Date().getFullYear() }}</span>
+      <span>&copy; AutoTrustPH {{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>
 </template>
