@@ -453,10 +453,10 @@ export default {
                 this.threeYears = this.amountFinanced * 1.4273 / 36;
                 this.fourYears = this.amountFinanced * 1.5426 / 48;
             } else if (this.bank == 'Maybank') {
-                // this.oneYear = this.amountFinanced * 1.1197 / 12;
-                this.twoYears = this.amountFinanced * 1.3188 / 24;
-                this.threeYears = this.amountFinanced * 1.4151 / 36;
-                this.fourYears = this.amountFinanced * 1.5225 / 48;
+                this.oneYear = this.amountFinanced * 1.1400 / 12;
+                this.twoYears = this.amountFinanced * 1.3395 / 24;
+                this.threeYears = this.amountFinanced * 1.4475 / 36;
+                this.fourYears = this.amountFinanced * 1.5750 / 48;
             } else if (this.bank == 'Malayan Bank') {
                 // this.oneYear = this.amountFinanced * 1.1302 / 12;
                 this.twoYears = this.amountFinanced * 1.3236 / 24;
