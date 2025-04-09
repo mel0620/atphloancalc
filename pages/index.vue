@@ -18,7 +18,7 @@
                     <v-col cols="12">
                         <v-combobox
                             v-model="bank"
-                            :items="['JACCS','Security Bank','Maybank','Malayan Bank','Brand New', 'Motorcycle']"
+                            :items="['JACCS','Security Bank','Eastwest','Maybank','Malayan Bank','Brand New','Motorcycle']"
                             prepend-inner-icon="mdi-bank"
                             label="Financing"
                             placeholder="Select Bank/Financing Company"
@@ -394,6 +394,11 @@ export default {
                 this.twoYears = this.amountFinanced * 1.3260 / 24;
                 this.threeYears = this.amountFinanced * 1.4273 / 36;
                 this.fourYears = this.amountFinanced * 1.5426 / 48;
+            } else if (this.bank == 'Eastwest') {
+                // this.oneYear = this.amountFinanced * 1.1280 / 12;
+                this.twoYears = this.amountFinanced * 1.3383 / 24;
+                this.threeYears = this.amountFinanced * 1.4351 / 36;
+                this.fourYears = this.amountFinanced * 1.5363 / 48;
             } else if (this.bank == 'Maybank') {
                 // this.oneYear = this.amountFinanced * 1.1197 / 12;
                 this.twoYears = this.amountFinanced * 1.3188 / 24;
@@ -452,6 +457,11 @@ export default {
                 this.twoYears = this.amountFinanced * 1.3260 / 24;
                 this.threeYears = this.amountFinanced * 1.4273 / 36;
                 this.fourYears = this.amountFinanced * 1.5426 / 48;
+            } else if (this.bank == 'Eastwest') {
+                // this.oneYear = this.amountFinanced * 1.1280 / 12;
+                this.twoYears = this.amountFinanced * 1.3383 / 24;
+                this.threeYears = this.amountFinanced * 1.4351 / 36;
+                this.fourYears = this.amountFinanced * 1.5363 / 48;
             } else if (this.bank == 'Maybank') {
                 this.oneYear = this.amountFinanced * 1.1400 / 12;
                 this.twoYears = this.amountFinanced * 1.3395 / 24;
