@@ -19,7 +19,7 @@
                 </ul>
             </v-col>
             <v-col cols="12" md="6" sm="12">
-                <h3>Ortigas, Pasig</h3>
+                <h3>Marikina City</h3>
                 <ul>
                     <li>Smart: <a href="tel:+09209577301" class="text-decoration-none">0920 957 7301</a></li>
                     <li>Globe: <a href="tel:+09778347647" class="text-decoration-none">0977 834 7647</a></li>
