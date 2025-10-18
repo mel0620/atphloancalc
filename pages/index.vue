@@ -159,7 +159,7 @@
                     <v-col cols="12" md="4" sm="12">
                         <v-text-field
                             v-model="others"
-                            label="Others"
+                            label="Others/Transfer"
                             outlined
                             hide-details
                             placeholder="0.00"
@@ -204,14 +204,14 @@
                         <div><b>Down Payment:</b> {{ formatPrice(downPayment) }}</div>
                         <div><b>Amount Financed:</b> {{ formatPrice(amountFinanced) }}</div>
                         <!-- <div><b>Terms:</b></div> -->
-                        <!-- <div><b>12 Months:</b> {{ formatPrice(oneYear) }}</div> -->
+                        <div><b>12 Months:</b> {{ formatPrice(oneYear) }}</div>
                         <div><b>24 Months Term:</b> {{ formatPrice(twoYears) }}</div>
                         <div><b>36 Months Term:</b> {{ formatPrice(threeYears) }}</div>
                         <div><b>48 Months Term:</b> {{ formatPrice(fourYears) }}</div>
                         <blockquote v-if="chattel == 0 && insurance == 0" class="blockquote pa-0">
                             <footer>
                                 <small>
-                                    <em>* Aside from the Down Payment, you will pay for the Chattel and Comprehensive Insurance with acts of nature.</em>
+                                    <em>* {{ note }}</em>
                                 </small>
                             </footer>
                         </blockquote>
@@ -226,7 +226,8 @@
                         <div><b><span v-if="!isJackUp && !isCustom">{{ downPaymentSelect }}%</span> Down Payment:</b> {{ formatPrice(downPayment) }}</div>
                         <div><b><span v-if="!isJackUp && !isCustom">{{ amountFinancedPercent }}%</span> Amount Financed:</b> {{ formatPrice(amountFinanced) }}</div>
                         <!-- <div><b>Terms:</b></div> -->
-                        <div v-if="bank == 'Motorcycle'"><b>12 Months:</b> {{ formatPrice(oneYear) }}</div>
+                        <div v-if="bank != 'Brand New' && bank != 'Eastwest'"><b>12 Months Term:</b> {{ formatPrice(oneYear) }}</div>
+                        <div v-if="bank == 'Maybank'"><b>18 Months Term:</b> {{ formatPrice(eighteenMonths) }}</div>
                         <div><b>24 Months Term:</b> {{ formatPrice(twoYears) }}</div>
                         <div><b>36 Months Term:</b> {{ formatPrice(threeYears) }}</div>
                         <div v-if="bank != 'Motorcycle'"><b>48 Months Term:</b> {{ formatPrice(fourYears) }}</div>
@@ -234,7 +235,7 @@
                         <blockquote v-if="chattel == 0 && insurance == 0 && bank != 'Brand New'" class="blockquote pa-0">
                             <footer>
                                 <small>
-                                    <em>* Aside from the Down Payment, you will pay for the Chattel and Comprehensive Insurance with acts of nature.</em>
+                                    <em>* {{ note }}</em>
                                 </small>
                             </footer>
                         </blockquote>
@@ -294,262 +295,218 @@
 
 <script>
 export default {
-    data: () => ({
-        isResultDialog: false,
-        isCustom: false,
-        showReferenceDialog: false,
-        bank: 'JACCS',
+  data: () => ({
+    isResultDialog: false,
+    isCustom: false,
+    showReferenceDialog: false,
+    bank: 'JACCS',
+    note: 'In addition to the Down Payment, you will also be required to pay for the Chattel Mortgage and Comprehensive Insurance (with Acts of Nature coverage)',
 
-        isJackUp: false,
-        origPrice: null,
-        jackUpPrice: null,
-        jackUpPriceTotal: null,
-        jackUpAF: null,
+    isJackUp: false,
+    origPrice: null,
+    jackUpPrice: null,
+    jackUpPriceTotal: null,
+    jackUpAF: null,
 
-        valid: true,
-        rules: [
-            value => !!value || 'Required.',
-        ],
-        unitDetails: '',
-        unitPrice: null,
-        chattel: 0,
-        insurance: 0,
-        others: 0,
-        totalEstCashout: null,
-        dpCustom: null,
-        downPayment: null,
-        downPaymentSelect: null,
-        downPaymentSelectItems: [20,25,30,35,40,45,50,55,60],
-        banks: [
-            { jaccs: ['1.1373','1.3395','1.4494','1.5729'] }
-        ],
-        amountFinancedPercent: null,
-        amountFinanced: null,
-        terms: '',
-        // oneYear: null,
-        twoYears: null,
-        threeYears: null,
-        fourYears: null,
-        fiveYears: null,
+    valid: true,
+    rules: [
+      value => !!value || 'Required.',
+    ],
+    unitDetails: '',
+    unitPrice: null,
+    chattel: 0,
+    insurance: 0,
+    others: 0,
+    totalEstCashout: null,
+    dpCustom: null,
+    downPayment: null,
+    downPaymentSelect: null,
+    downPaymentSelectItems: [20,25,30,35,40,45,50,55,60],
 
-        headers: [
-            {
-                text: 'Amount Financed',
-                align: 'start',
-                value: 'af',
-            },
-            { text: 'CMF', align: 'start', value: 'cmf' },
-            { text: 'Insurance with AOG', align: 'start', value: 'ins' },
-        ],
-        estimates: [
-            {
-                af: '300K - 450K',
-                cmf: '24,000',
-                ins: '29,000'
-            },
-            {
-                af: '490K',
-                cmf: '25,000',
-                ins: '30,000'
-            },
-            {
-                af: '500K',
-                cmf: '27,000',
-                ins: '32,000'
-            },
-            {
-                af: '750K - 800K',
-                cmf: '30,000',
-                ins: '35,000'
-            },
-            {
-                af: '1.1M',
-                cmf: '40,000',
-                ins: '38,000'
-            },
-        ],
-    }),
-    methods: {
-        compute() {
+    // rates are multipliers for the amount financed (e.g. 1.3395) per term (months)
+    rates: {
+      'JACCS':   { 12: 1.1373, 24: 1.3395, 36: 1.4494, 48: 1.5729 },
+      'Security Bank': { 12: 1.1280, 24: 1.3260, 36: 1.4273, 48: 1.5426 },
+      'Eastwest': { 24: 1.3383, 36: 1.4351, 48: 1.5363 }, //12: 1.1280
+      'Maybank':  { 12: 1.1197, 18: 1.1950, 24: 1.3188, 36: 1.4151, 48: 1.5225 }, // keep canonical rates here
+      'Malayan Bank': { 12: 1.1302, 24: 1.3236, 36: 1.4172, 48: 1.5216 },
+      'Brand New': { 24: 1.2626, 36: 1.3858, 48: 1.4618, 60: 1.5394 },
+      'Motorcycle': { 12: 1.11, 24: 1.2670, 36: 1.3796 }
+    },
 
-            if (!this.$refs.form.validate()) {
-                return;
-            }
+    amountFinancedPercent: null,
+    amountFinanced: null,
+    // oneYear is still used in template for Motorcycle and others so keep it
+    oneYear: null,
+    eighteenMonths: null,
+    twoYears: null,
+    threeYears: null,
+    fourYears: null,
+    fiveYears: null,
 
-            this.isResultDialog = true;
+    headers: [
+      {
+        text: 'Amount Financed',
+        align: 'start',
+        value: 'af',
+      },
+      { text: 'CMF', align: 'start', value: 'cmf' },
+      { text: 'Insurance with AOG', align: 'start', value: 'ins' },
+    ],
+    estimates: [
+      { af: '300K - 450K', cmf: '24,000', ins: '29,000' },
+      { af: '490K', cmf: '25,000', ins: '30,000' },
+      { af: '500K', cmf: '27,000', ins: '32,000' },
+      { af: '750K - 800K', cmf: '30,000', ins: '35,000' },
+      { af: '1.1M', cmf: '40,000', ins: '38,000' },
+    ],
+  }),
+  methods: {
+    // helper to apply rate multipliers if they exist for the bank
+    applyRates(amount) {
+      // zero or falsy amount => skip
+      if (!amount) return;
 
-            this.downPayment = this.unitPrice * (this.downPaymentSelect/100).toFixed(2);
+      const bankRates = this.rates[this.bank] || {};
 
-            this.amountFinancedPercent = 100 - this.downPaymentSelect;
-            
-            this.amountFinanced = this.unitPrice - this.downPayment;
+      // for each possible term set the corresponding property if rate exists
+      if (bankRates[12] !== undefined) {
+        this.oneYear = amount * bankRates[12] / 12;
+      } else {
+        this.oneYear = null;
+      }
 
-            if(this.bank == 'JACCS') {
-                // this.oneYear = this.amountFinanced * 1.1373 / 12;
-                this.twoYears = this.amountFinanced * 1.3395 / 24;
-                this.threeYears = this.amountFinanced * 1.4494 / 36;
-                this.fourYears = this.amountFinanced * 1.5729 / 48;
-            } else if (this.bank == 'Security Bank') {
-                // this.oneYear = this.amountFinanced * 1.1280 / 12;
-                this.twoYears = this.amountFinanced * 1.3260 / 24;
-                this.threeYears = this.amountFinanced * 1.4273 / 36;
-                this.fourYears = this.amountFinanced * 1.5426 / 48;
-            } else if (this.bank == 'Eastwest') {
-                // this.oneYear = this.amountFinanced * 1.1280 / 12;
-                this.twoYears = this.amountFinanced * 1.3383 / 24;
-                this.threeYears = this.amountFinanced * 1.4351 / 36;
-                this.fourYears = this.amountFinanced * 1.5363 / 48;
-            } else if (this.bank == 'Maybank') {
-                // this.oneYear = this.amountFinanced * 1.1197 / 12;
-                this.twoYears = this.amountFinanced * 1.3188 / 24;
-                this.threeYears = this.amountFinanced * 1.4151 / 36;
-                this.fourYears = this.amountFinanced * 1.5225 / 48;
-            } else if (this.bank == 'Malayan Bank') {
-                // this.oneYear = this.amountFinanced * 1.1302 / 12;
-                this.twoYears = this.amountFinanced * 1.3236 / 24;
-                this.threeYears = this.amountFinanced * 1.4172 / 36;
-                this.fourYears = this.amountFinanced * 1.5216 / 48;
-            } else if (this.bank == 'Brand New') {
-                this.twoYears = this.amountFinanced * 1.2626 / 24;
-                this.threeYears = this.amountFinanced * 1.3858 / 36;
-                this.fourYears = this.amountFinanced * 1.4618 / 48;
-                this.fiveYears = this.amountFinanced * 1.5394 / 60;
-            } else if (this.bank == 'Motorcycle') {
-                this.oneYear = this.amountFinanced * 1.11 / 12;
-                this.twoYears = this.amountFinanced * 1.2670 / 24;
-                this.threeYears = this.amountFinanced * 1.3796 / 36;
-            }
+      if (bankRates[18] !== undefined) {
+        this.eighteenMonths = amount * bankRates[18] / 18;
+      } else {
+        this.eighteenMonths = null;
+      }
 
-            let downpayment = this.downPayment;
-            let chattel = this.chattel;
-            let insurance = this.insurance;
-            let others = this.others;
+      if (bankRates[24] !== undefined) {
+        this.twoYears = amount * bankRates[24] / 24;
+      } else {
+        this.twoYears = null;
+      }
 
-            if (chattel == '' && insurance == '' && others == '') {
-                chattel = 0;
-                insurance = 0;
-                others = 0;
-            }
+      if (bankRates[36] !== undefined) {
+        this.threeYears = amount * bankRates[36] / 36;
+      } else {
+        this.threeYears = null;
+      }
 
-            this.totalEstCashout = parseInt(downpayment) + parseInt(chattel) + parseInt(insurance) + parseInt(others);
-        },
-        computeCustom() {
+      if (bankRates[48] !== undefined) {
+        this.fourYears = amount * bankRates[48] / 48;
+      } else {
+        this.fourYears = null;
+      }
 
-            if (!this.$refs.form.validate()) {
-                return;
-            }
+      if (bankRates[60] !== undefined) {
+        this.fiveYears = amount * bankRates[60] / 60;
+      } else {
+        this.fiveYears = null;
+      }
+    },
 
-            this.isResultDialog = true;
+    compute() {
+      if (!this.$refs.form.validate()) {
+        return;
+      }
 
-            this.downPayment = this.dpCustom;
-            
-            this.amountFinanced = this.unitPrice - this.downPayment;
+      this.isResultDialog = true;
 
-            // this.downPayment = this.unitPrice * (this.dpCustom/100).toFixed(2);
+      // ensure numeric math (avoid .toFixed returning string)
+      const dpPercent = Number(this.downPaymentSelect) / 100;
+      this.downPayment = Number(this.unitPrice) * dpPercent;
 
-            if(this.bank == 'JACCS') {
-                // this.oneYear = this.amountFinanced * 1.1373 / 12;
-                this.twoYears = this.amountFinanced * 1.3395 / 24;
-                this.threeYears = this.amountFinanced * 1.4494 / 36;
-                this.fourYears = this.amountFinanced * 1.5729 / 48;
-            } else if (this.bank == 'Security Bank') {
-                // this.oneYear = this.amountFinanced * 1.1280 / 12;
-                this.twoYears = this.amountFinanced * 1.3260 / 24;
-                this.threeYears = this.amountFinanced * 1.4273 / 36;
-                this.fourYears = this.amountFinanced * 1.5426 / 48;
-            } else if (this.bank == 'Eastwest') {
-                // this.oneYear = this.amountFinanced * 1.1280 / 12;
-                this.twoYears = this.amountFinanced * 1.3383 / 24;
-                this.threeYears = this.amountFinanced * 1.4351 / 36;
-                this.fourYears = this.amountFinanced * 1.5363 / 48;
-            } else if (this.bank == 'Maybank') {
-                this.oneYear = this.amountFinanced * 1.1400 / 12;
-                this.twoYears = this.amountFinanced * 1.3395 / 24;
-                this.threeYears = this.amountFinanced * 1.4475 / 36;
-                this.fourYears = this.amountFinanced * 1.5750 / 48;
-            } else if (this.bank == 'Malayan Bank') {
-                // this.oneYear = this.amountFinanced * 1.1302 / 12;
-                this.twoYears = this.amountFinanced * 1.3236 / 24;
-                this.threeYears = this.amountFinanced * 1.4172 / 36;
-                this.fourYears = this.amountFinanced * 1.5216 / 48;
-            } else if (this.bank == 'Brand New') {
-                this.twoYears = this.amountFinanced * 1.2626 / 24;
-                this.threeYears = this.amountFinanced * 1.3858 / 36;
-                this.fourYears = this.amountFinanced * 1.4618 / 48;
-                this.fiveYears = this.amountFinanced * 1.5394 / 60;
-            } else if (this.bank == 'Motorcycle') {
-                this.oneYear = this.amountFinanced * 1.11 / 12;
-                this.twoYears = this.amountFinanced * 1.2670 / 24;
-                this.threeYears = this.amountFinanced * 1.3796 / 36;
-            }
+      this.amountFinancedPercent = 100 - Number(this.downPaymentSelect);
 
-            let downpayment = this.downPayment;
-            let chattel = this.chattel;
-            let insurance = this.insurance;
-            let others = this.others;
+      this.amountFinanced = Number(this.unitPrice) - Number(this.downPayment);
 
-            if (chattel == '' && insurance == '' && others == '') {
-                chattel = 0;
-                insurance = 0;
-                others = 0;
-            }
+      // apply centralized rates
+      this.applyRates(this.amountFinanced);
 
-            this.totalEstCashout = parseInt(downpayment) + parseInt(chattel) + parseInt(insurance) + parseInt(others);
+      // normalize cashout inputs
+      let downpayment = this.downPayment || 0;
+      let chattel = this.chattel || 0;
+      let insurance = this.insurance || 0;
+      let others = this.others || 0;
 
-        },
-        computeJackUp() {
-            if (!this.$refs.form.validate()) {
-                return;
-            }
+      this.totalEstCashout = parseInt(downpayment) + parseInt(chattel) + parseInt(insurance) + parseInt(others);
+    },
 
-            this.isResultDialog = true;
+    computeCustom() {
+      if (!this.$refs.form.validate()) {
+        return;
+      }
 
-            let origprice = this.origPrice;
-            let jackupprice = this.jackUpPrice;
-            
-            this.jackUpPriceTotal = parseInt(origprice) + parseInt(jackupprice);
+      this.isResultDialog = true;
 
-            this.amountFinanced = this.jackUpPriceTotal * (this.jackUpAF/100).toFixed(2);
-            this.downPayment = this.origPrice - this.amountFinanced;
+      this.downPayment = Number(this.dpCustom) || 0;
 
-            // this.oneYear = this.amountFinanced * 1.1373 / 12;
-            this.twoYears = this.amountFinanced * 1.3395 / 24;
-            this.threeYears = this.amountFinanced * 1.4494 / 36;
-            this.fourYears = this.amountFinanced * 1.5729 / 48;
+      this.amountFinanced = Number(this.unitPrice) - Number(this.downPayment);
 
-            let downpayment = this.downPayment;
-            let chattel = this.chattel;
-            let insurance = this.insurance;
-            let others = this.others;
-            
-            if (chattel == '' && insurance == '' && others == '') {
-                chattel = 0;
-                insurance = 0;
-                others = 0;
-            }
+      // use same central rates
+      this.applyRates(this.amountFinanced);
 
-            this.totalEstCashout = parseInt(downpayment) + parseInt(chattel) + parseInt(insurance) + parseInt(others);
-        },
-        clear() {
-            this.$refs.form.resetValidation();
-            this.unitDetails = '';
-            this.unitPrice = 0;
-            this.origPrice = 0;
-            this.jackUpPrice = 0;
-            this.dpCustom = 0;
-            this.chattel = 0;
-            this.insurance = 0;
-            this.others = 0;
-        },
-        formatPrice(value) {
-            var formatter = new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: 'PHP',
-                minimumFractionDigits: 0
-            });
-            return formatter.format(Math.round(value));
-        },
-    }
+      let downpayment = this.downPayment || 0;
+      let chattel = this.chattel || 0;
+      let insurance = this.insurance || 0;
+      let others = this.others || 0;
+
+      this.totalEstCashout = parseInt(downpayment) + parseInt(chattel) + parseInt(insurance) + parseInt(others);
+    },
+
+    computeJackUp() {
+      if (!this.$refs.form.validate()) {
+        return;
+      }
+
+      this.isResultDialog = true;
+
+      const origprice = Number(this.origPrice) || 0;
+      const jackupprice = Number(this.jackUpPrice) || 0;
+
+      this.jackUpPriceTotal = origprice + jackupprice;
+
+      // ensure numeric percent
+      const afPercent = Number(this.jackUpAF) / 100 || 0;
+      this.amountFinanced = this.jackUpPriceTotal * afPercent;
+
+      // It looked like downPayment was original price minus amountFinanced in your code
+      this.downPayment = origprice - this.amountFinanced;
+
+      // apply rates for jack-up — JACCS-like default in original logic; we'll use selected bank's rates
+      this.applyRates(this.amountFinanced);
+
+      let downpayment = this.downPayment || 0;
+      let chattel = this.chattel || 0;
+      let insurance = this.insurance || 0;
+      let others = this.others || 0;
+
+      this.totalEstCashout = parseInt(downpayment) + parseInt(chattel) + parseInt(insurance) + parseInt(others);
+    },
+
+    clear() {
+      this.$refs.form.resetValidation();
+      this.unitDetails = '';
+      this.unitPrice = 0;
+      this.origPrice = 0;
+      this.jackUpPrice = 0;
+      this.dpCustom = 0;
+      this.chattel = 0;
+      this.insurance = 0;
+      this.others = 0;
+    },
+
+    formatPrice(value) {
+      var formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'PHP',
+        minimumFractionDigits: 0
+      });
+      return formatter.format(Math.round(value));
+    },
+  }
 }
 </script>
 
