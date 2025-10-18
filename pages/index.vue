@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-container>
+        <v-container class="container-dense">
             <v-form ref="form" class="mb-4"
                 v-model="valid"
                 lazy-validation
@@ -132,7 +132,7 @@
                 </div>
 
                 <v-row>
-                    <v-col cols="12" md="4" sm="12">
+                    <v-col cols="12">
                         <v-text-field
                             v-model="chattel"
                             label="Chattel Mortgage Fee"
@@ -144,7 +144,7 @@
                             @click:append="showReferenceDialog = true"
                         ></v-text-field>
                     </v-col>
-                    <v-col cols="12" md="4" sm="12">
+                    <v-col cols="12">
                         <v-text-field
                             v-model="insurance"
                             label="Insurance with AOG"
@@ -156,10 +156,10 @@
                             @click:append="showReferenceDialog = true"
                         ></v-text-field>
                     </v-col>
-                    <v-col cols="12" md="4" sm="12">
+                    <v-col cols="12">
                         <v-text-field
                             v-model="others"
-                            label="Others/Transfer"
+                            label="Other/Transfer"
                             outlined
                             hide-details
                             placeholder="0.00"
@@ -239,9 +239,9 @@
                                 </small>
                             </footer>
                         </blockquote>
-                        <div v-if="chattel != 0"><b>Chattel:</b> {{ formatPrice(chattel) }} Estimated only</div>
+                        <div v-if="chattel != 0"><b>CMF:</b> {{ formatPrice(chattel) }} Estimated only</div>
                         <div v-if="insurance != 0"><b>Insurance:</b> {{ formatPrice(insurance) }} Estimated only</div>
-                        <div v-if="others != 0"><b>Others:</b> {{ formatPrice(others) }}</div>
+                        <div v-if="others != 0"><b>Other/Transfer:</b> {{ formatPrice(others) }}</div>
                         <h3 class="red--text" v-if="chattel != 0 && insurance != 0">ESTIMATED CASHOUT: {{ formatPrice(totalEstCashout) }}</h3>
                     </div>
                 </v-card-text>
@@ -296,38 +296,38 @@
 <script>
 export default {
   data: () => ({
-    isResultDialog: false,
-    isCustom: false,
+    isResultDialog     : false,
+    isCustom           : false,
     showReferenceDialog: false,
-    bank: 'JACCS',
-    note: 'In addition to the Down Payment, you will also be required to pay for the Chattel Mortgage and Comprehensive Insurance (with Acts of Nature coverage)',
+    bank               : 'JACCS',
+    note               : 'In addition to the Down Payment, you will also be required to pay for the Chattel Mortgage and Comprehensive Insurance (with Acts of Nature coverage)',
 
-    isJackUp: false,
-    origPrice: null,
-    jackUpPrice: null,
+    isJackUp        : false,
+    origPrice       : null,
+    jackUpPrice     : null,
     jackUpPriceTotal: null,
-    jackUpAF: null,
+    jackUpAF        : null,
 
     valid: true,
     rules: [
       value => !!value || 'Required.',
     ],
-    unitDetails: '',
-    unitPrice: null,
-    chattel: 0,
-    insurance: 0,
-    others: 0,
-    totalEstCashout: null,
-    dpCustom: null,
-    downPayment: null,
-    downPaymentSelect: null,
+    unitDetails           : '',
+    unitPrice             : null,
+    chattel               : 0,
+    insurance             : 0,
+    others                : 0,
+    totalEstCashout       : null,
+    dpCustom              : null,
+    downPayment           : null,
+    downPaymentSelect     : null,
     downPaymentSelectItems: [20,25,30,35,40,45,50,55,60],
 
     // rates are multipliers for the amount financed (e.g. 1.3395) per term (months)
     rates: {
       'JACCS'        : { 12: 1.1373, 24: 1.3395, 36: 1.4494, 48: 1.5729 },
       'Security Bank': { 12: 1.1280, 24: 1.3260, 36: 1.4273, 48: 1.5426 },
-      'Eastwest'     : { 24: 1.3383, 36: 1.4351, 48: 1.5363 },                           //12: 1.1280
+      'Eastwest'     : { 24: 1.3383, 36: 1.4351, 48: 1.5363 }, //12: 1.1280
       'Maybank'      : { 12: 1.1400, 18: 1.1950, 24: 1.3395, 36: 1.4475, 48: 1.5750 },
       'Malayan Bank' : { 12: 1.1302, 24: 1.3236, 36: 1.4172, 48: 1.5216 },
       'LDB'          : { 24: 1.3236, 36: 1.4172, 48: 1.5216 },
@@ -336,14 +336,13 @@ export default {
     },
 
     amountFinancedPercent: null,
-    amountFinanced: null,
-    // oneYear is still used in template for Motorcycle and others so keep it
-    oneYear: null,
-    eighteenMonths: null,
-    twoYears: null,
-    threeYears: null,
-    fourYears: null,
-    fiveYears: null,
+    amountFinanced       : null,
+    oneYear              : null,
+    eighteenMonths       : null,
+    twoYears             : null,
+    threeYears           : null,
+    fourYears            : null,
+    fiveYears            : null,
 
     headers: [
       {
@@ -415,22 +414,22 @@ export default {
 
       this.isResultDialog = true;
 
-      // ensure numeric math (avoid .toFixed returning string)
-      const dpPercent = Number(this.downPaymentSelect) / 100;
-      this.downPayment = Number(this.unitPrice) * dpPercent;
+        // ensure numeric math (avoid .toFixed returning string)
+      const dpPercent        = Number(this.downPaymentSelect) / 100;
+            this.downPayment = Number(this.unitPrice) * dpPercent;
 
       this.amountFinancedPercent = 100 - Number(this.downPaymentSelect);
 
       this.amountFinanced = Number(this.unitPrice) - Number(this.downPayment);
 
-      // apply centralized rates
+        // apply centralized rates
       this.applyRates(this.amountFinanced);
 
-      // normalize cashout inputs
+        // normalize cashout inputs
       let downpayment = this.downPayment || 0;
-      let chattel = this.chattel || 0;
-      let insurance = this.insurance || 0;
-      let others = this.others || 0;
+      let chattel     = this.chattel || 0;
+      let insurance   = this.insurance || 0;
+      let others      = this.others || 0;
 
       this.totalEstCashout = parseInt(downpayment) + parseInt(chattel) + parseInt(insurance) + parseInt(others);
     },
@@ -450,9 +449,9 @@ export default {
       this.applyRates(this.amountFinanced);
 
       let downpayment = this.downPayment || 0;
-      let chattel = this.chattel || 0;
-      let insurance = this.insurance || 0;
-      let others = this.others || 0;
+      let chattel     = this.chattel || 0;
+      let insurance   = this.insurance || 0;
+      let others      = this.others || 0;
 
       this.totalEstCashout = parseInt(downpayment) + parseInt(chattel) + parseInt(insurance) + parseInt(others);
     },
@@ -464,25 +463,25 @@ export default {
 
       this.isResultDialog = true;
 
-      const origprice = Number(this.origPrice) || 0;
+      const origprice   = Number(this.origPrice) || 0;
       const jackupprice = Number(this.jackUpPrice) || 0;
 
       this.jackUpPriceTotal = origprice + jackupprice;
 
-      // ensure numeric percent
-      const afPercent = Number(this.jackUpAF) / 100 || 0;
-      this.amountFinanced = this.jackUpPriceTotal * afPercent;
+        // ensure numeric percent
+      const afPercent           = Number(this.jackUpAF) / 100 || 0;
+            this.amountFinanced = this.jackUpPriceTotal * afPercent;
 
-      // It looked like downPayment was original price minus amountFinanced in your code
+        // It looked like downPayment was original price minus amountFinanced in your code
       this.downPayment = origprice - this.amountFinanced;
 
-      // apply rates for jack-up — JACCS-like default in original logic; we'll use selected bank's rates
+        // apply rates for jack-up — JACCS-like default in original logic; we'll use selected bank's rates
       this.applyRates(this.amountFinanced);
 
       let downpayment = this.downPayment || 0;
-      let chattel = this.chattel || 0;
-      let insurance = this.insurance || 0;
-      let others = this.others || 0;
+      let chattel     = this.chattel || 0;
+      let insurance   = this.insurance || 0;
+      let others      = this.others || 0;
 
       this.totalEstCashout = parseInt(downpayment) + parseInt(chattel) + parseInt(insurance) + parseInt(others);
     },
@@ -490,19 +489,19 @@ export default {
     clear() {
       this.$refs.form.resetValidation();
       this.unitDetails = '';
-      this.unitPrice = 0;
-      this.origPrice = 0;
+      this.unitPrice   = 0;
+      this.origPrice   = 0;
       this.jackUpPrice = 0;
-      this.dpCustom = 0;
-      this.chattel = 0;
-      this.insurance = 0;
-      this.others = 0;
+      this.dpCustom    = 0;
+      this.chattel     = 0;
+      this.insurance   = 0;
+      this.others      = 0;
     },
 
     formatPrice(value) {
       var formatter = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'PHP',
+        style                : 'currency',
+        currency             : 'PHP',
         minimumFractionDigits: 0
       });
       return formatter.format(Math.round(value));
@@ -516,5 +515,9 @@ export default {
     background-color: #fff;
     // border: 1px solid rgba(#000, .1);
     padding: 1rem;
+}
+.container-dense {
+    max-width: 480px;
+    margin: auto;
 }
 </style>
