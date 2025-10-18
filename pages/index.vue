@@ -18,7 +18,7 @@
                     <v-col cols="12">
                         <v-combobox
                             v-model="bank"
-                            :items="['JACCS','Security Bank','Eastwest','Maybank','Malayan Bank','Brand New','Motorcycle']"
+                            :items="['JACCS','Security Bank','Eastwest','Maybank','Malayan Bank', 'LDB', 'Brand New','Motorcycle']"
                             prepend-inner-icon="mdi-bank"
                             label="Financing"
                             placeholder="Select Bank/Financing Company"
@@ -226,7 +226,7 @@
                         <div><b><span v-if="!isJackUp && !isCustom">{{ downPaymentSelect }}%</span> Down Payment:</b> {{ formatPrice(downPayment) }}</div>
                         <div><b><span v-if="!isJackUp && !isCustom">{{ amountFinancedPercent }}%</span> Amount Financed:</b> {{ formatPrice(amountFinanced) }}</div>
                         <!-- <div><b>Terms:</b></div> -->
-                        <div v-if="bank != 'Brand New' && bank != 'Eastwest'"><b>12 Months Term:</b> {{ formatPrice(oneYear) }}</div>
+                        <div v-if="bank != 'Brand New' && bank != 'Eastwest' && bank != 'LDB'"><b>12 Months Term:</b> {{ formatPrice(oneYear) }}</div>
                         <div v-if="bank == 'Maybank'"><b>18 Months Term:</b> {{ formatPrice(eighteenMonths) }}</div>
                         <div><b>24 Months Term:</b> {{ formatPrice(twoYears) }}</div>
                         <div><b>36 Months Term:</b> {{ formatPrice(threeYears) }}</div>
@@ -325,13 +325,14 @@ export default {
 
     // rates are multipliers for the amount financed (e.g. 1.3395) per term (months)
     rates: {
-      'JACCS':   { 12: 1.1373, 24: 1.3395, 36: 1.4494, 48: 1.5729 },
+      'JACCS'        : { 12: 1.1373, 24: 1.3395, 36: 1.4494, 48: 1.5729 },
       'Security Bank': { 12: 1.1280, 24: 1.3260, 36: 1.4273, 48: 1.5426 },
-      'Eastwest': { 24: 1.3383, 36: 1.4351, 48: 1.5363 }, //12: 1.1280
-      'Maybank':  { 12: 1.1197, 18: 1.1950, 24: 1.3188, 36: 1.4151, 48: 1.5225 }, // keep canonical rates here
-      'Malayan Bank': { 12: 1.1302, 24: 1.3236, 36: 1.4172, 48: 1.5216 },
-      'Brand New': { 24: 1.2626, 36: 1.3858, 48: 1.4618, 60: 1.5394 },
-      'Motorcycle': { 12: 1.11, 24: 1.2670, 36: 1.3796 }
+      'Eastwest'     : { 24: 1.3383, 36: 1.4351, 48: 1.5363 },                           //12: 1.1280
+      'Maybank'      : { 12: 1.1400, 18: 1.1950, 24: 1.3395, 36: 1.4475, 48: 1.5750 },
+      'Malayan Bank' : { 12: 1.1302, 24: 1.3236, 36: 1.4172, 48: 1.5216 },
+      'LDB'          : { 24: 1.3236, 36: 1.4172, 48: 1.5216 },
+      'Brand New'    : { 24: 1.2626, 36: 1.3291, 48: 1.4011, 60: 1.4872 },
+      'Motorcycle'   : { 12: 1.1607, 24: 1.3180, 36: 1.4317 }
     },
 
     amountFinancedPercent: null,
