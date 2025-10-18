@@ -321,7 +321,7 @@ export default {
         downPaymentSelect: null,
         downPaymentSelectItems: [20,25,30,35,40,45,50,55,60],
         banks: [
-            { jaccs: ['1.1373','1.3395','1.4493','1.5729'] }
+            { jaccs: ['1.1373','1.3395','1.4494','1.5729'] }
         ],
         amountFinancedPercent: null,
         amountFinanced: null,
@@ -387,7 +387,7 @@ export default {
             if(this.bank == 'JACCS') {
                 // this.oneYear = this.amountFinanced * 1.1373 / 12;
                 this.twoYears = this.amountFinanced * 1.3395 / 24;
-                this.threeYears = this.amountFinanced * 1.4493 / 36;
+                this.threeYears = this.amountFinanced * 1.4494 / 36;
                 this.fourYears = this.amountFinanced * 1.5729 / 48;
             } else if (this.bank == 'Security Bank') {
                 // this.oneYear = this.amountFinanced * 1.1280 / 12;
@@ -450,7 +450,7 @@ export default {
             if(this.bank == 'JACCS') {
                 // this.oneYear = this.amountFinanced * 1.1373 / 12;
                 this.twoYears = this.amountFinanced * 1.3395 / 24;
-                this.threeYears = this.amountFinanced * 1.4493 / 36;
+                this.threeYears = this.amountFinanced * 1.4494 / 36;
                 this.fourYears = this.amountFinanced * 1.5729 / 48;
             } else if (this.bank == 'Security Bank') {
                 // this.oneYear = this.amountFinanced * 1.1280 / 12;
@@ -514,7 +514,7 @@ export default {
 
             // this.oneYear = this.amountFinanced * 1.1373 / 12;
             this.twoYears = this.amountFinanced * 1.3395 / 24;
-            this.threeYears = this.amountFinanced * 1.4493 / 36;
+            this.threeYears = this.amountFinanced * 1.4494 / 36;
             this.fourYears = this.amountFinanced * 1.5729 / 48;
 
             let downpayment = this.downPayment;
