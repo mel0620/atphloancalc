@@ -34,6 +34,42 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title>{{ title }}</v-toolbar-title>
     </v-app-bar>
+    <v-snackbar
+      :value="$pwa.state.updateAvailable"
+      color="primary"
+      :timeout="0"
+      bottom
+      class="update-snackbar"
+    >
+      An update is available.
+      <template v-slot:action="{ attrs }">
+        <v-btn text v-bind="attrs" @click="$pwa.activateUpdate()">Refresh</v-btn>
+      </template>
+    </v-snackbar>
+    <v-snackbar
+      :value="showInstallPrompt"
+      color="primary"
+      :timeout="0"
+      bottom
+      class="install-snackbar"
+    >
+      Install AutoTrustPH Loan Calculator as an app.
+      <template v-slot:action="{ attrs }">
+        <v-btn text v-bind="attrs" @click="installApp">Install as an app</v-btn>
+      </template>
+    </v-snackbar>
+    <v-dialog v-model="showIosInstallInstructions" max-width="420">
+      <v-card>
+        <v-card-title>Install on iPhone or iPad</v-card-title>
+        <v-card-text>
+          In Safari, tap the Share button, then choose <strong>Add to Home Screen</strong>.
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn text color="primary" @click="showIosInstallInstructions = false">Got it</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     <v-main>
       <v-container>
         <Nuxt />
@@ -67,8 +103,25 @@
 
 <script>
 export default {
+  computed: {
+    showInstallPrompt () {
+      return !this.$pwa.state.updateAvailable &&
+        (this.$pwa.state.installAvailable || this.$pwa.state.iosInstallAvailable)
+    },
+  },
+  methods: {
+    async installApp () {
+      if (this.$pwa.state.iosInstallAvailable) {
+        this.showIosInstallInstructions = true
+        return
+      }
+
+      await this.$pwa.install()
+    },
+  },
   data () {
     return {
+      showIosInstallInstructions: false,
       clipped: false,
       drawer: false,
       fixed: false,
