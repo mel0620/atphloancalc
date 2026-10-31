@@ -231,7 +231,7 @@
                         <div><b>24 Months Term:</b> {{ formatPrice(twoYears) }}</div>
                         <div><b>36 Months Term:</b> {{ formatPrice(threeYears) }}</div>
                         <div v-if="bank != 'Motorcycle'"><b>48 Months Term:</b> {{ formatPrice(fourYears) }}</div>
-                        <div v-if="bank == 'Brand New'"><b>60 Months Term:</b> {{ formatPrice(fiveYears) }}</div>
+                        <div v-if="bank == 'Brand New' || bank == 'JACCS'"><b>60 Months Term:</b> {{ formatPrice(fiveYears) }}</div>
                         <blockquote v-if="chattel == 0 && insurance == 0 && bank != 'Brand New'" class="blockquote pa-0">
                             <footer>
                                 <small>
@@ -325,7 +325,7 @@ export default {
 
     // rates are multipliers for the amount financed (e.g. 1.3395) per term (months)
     rates: {
-      'JACCS'        : { 12: 1.1373, 24: 1.3395, 36: 1.4494, 48: 1.5729 },
+      'JACCS'        : { 12: 1.1621, 24: 1.3653, 36: 1.4896, 48: 1.6288, 60: 1.7920 },
       'Security Bank': { 12: 1.1280, 24: 1.3260, 36: 1.4273, 48: 1.5426 },
       'Eastwest'     : { 24: 1.3383, 36: 1.4351, 48: 1.5363 }, //12: 1.1280
       'Maybank'      : { 12: 1.1400, 18: 1.1950, 24: 1.3395, 36: 1.4475, 48: 1.5750 },
